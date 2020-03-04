@@ -91,12 +91,12 @@ namespace SonicPI {
     /**
     * Connect to SonicPiOSC
     */
-    //% block="connect SonicPi OSC"
-    export function connectSonicPiOSC() {
+    //% block="connect SonicPi OSC|Host = %host"
+    export function connectSonicPiOSC(host: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80"
-            sendAT(text, 0) // connect to website server
+            let text = "AT+CIPSTART=\"TCP\",\"" + host + "\",4560"
+            sendAT(text, 0) // connect to Sonic Pi OSC server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
