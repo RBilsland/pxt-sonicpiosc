@@ -1,7 +1,7 @@
 /**
  * Custom blocks
  */
-//% color=#FF3092 weight=90 icon="\uf025" block="Sonic Pi"
+//% color=#FF3092 weight=90 icon="\uf001" block="Sonic Pi"
 
 namespace SonicPI {
 
@@ -101,4 +101,17 @@ namespace SonicPI {
             basic.pause(100)
         }
     }
+
+    /**
+    * Send OSC message to Sonic Pi
+    */
+    //% block="Send OSC Message|Message = %message"
+    export function SendOSCMessage(message: string) {
+        if (sonicpiosc_connected) {
+            sendAT("AT+CIPSEND=" + (message.length + 2), 100)
+            sendAT(message, 100) // upload data
+            basic.pause(100)
+        }
+    }
+
 }
