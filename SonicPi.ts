@@ -1,7 +1,7 @@
 /**
  * Custom blocks
  */
-//% color=#0fbc11 weight=90 icon="\uf8f1" block="Sonic Pi"
+//% color=#FF3092 weight=90 icon="\uf025" block="Sonic Pi"
 
 namespace SonicPI {
 
