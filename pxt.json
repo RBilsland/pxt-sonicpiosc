@@ -1,0 +1,17 @@
+{
+    "name": "SonicPi",
+    "version": "1.0.0",
+    "description": "Sonic Pi Package by R.Bilsland",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "SonicPi.ts"
+    ],
+    "testFiles": [
+        "tests.ts"
+    ],
+    "public": true
+}
