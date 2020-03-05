@@ -120,7 +120,7 @@ namespace SonicPI {
     //% block="Send OSC Message"
     export function SendOSCTestMessage() {
         if (sonicpiosc_connected) {
-            message = "\x2f\x6f\x73\x63\x69\x6c\x6c\x61\x74\x6f\x72\x2f\x34\x2f\x66\x72\x65\x71\x75\x65\x6e\x63\x79\x00\x2c\x66\x00\x00\x43\xdc\x00\x00"
+            message = "0x2f" + "0x6f" + "0x73" + "0x63" + "0x69" + "0x6c" + "0x6c" + "0x61" + "0x74" + "0x6f" + "0x72" + "0x2f" + "0x34" + "0x2f" + "0x66" + "0x72" + "0x65" + "0x71" + "0x75" + "0x65" + "0x6e" + "0x63" + "0x79" + "0x00" + "0x2c" + "0x66" + "0x00" + "0x00" + "0x43" + "0xdc" + "0x00" + "0x00"
             sendAT("AT+CIPSEND=" + (message.length + 2), 100)
             sendAT(message, 100) // upload data
             basic.pause(100)
