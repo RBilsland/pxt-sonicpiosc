@@ -114,4 +114,19 @@ namespace SonicPI {
         }
     }
 
+    /**
+     * Return wifi_connected
+     */
+    //% block="WiFi Connected Status"
+    export function WiFiConnected(): string {
+        return wifi_connected.toString()
+    }
+
+    /**
+     * Return sonicpiosc_connected
+     */
+    //% block="SonicPi OSC Connected Status"
+    export function SonicPiOSCConnected(): string {
+        return sonicpiosc_connected.toString()
+    }
 }
