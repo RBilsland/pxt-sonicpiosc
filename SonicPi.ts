@@ -97,7 +97,7 @@ namespace SonicPI {
             sonicpiosc_connected = false
             let text = "AT+CIPSTART=\"TCP\",\"" + host + "\",4560"
             sendAT(text, 0) // connect to Sonic Pi OSC server
-            sonicpiosc_connected = waitResponse()
+            sonicpiosc_connected = true
             basic.pause(100)
         }
     }
@@ -108,6 +108,19 @@ namespace SonicPI {
     //% block="Send OSC Message|Message = %message"
     export function SendOSCMessage(message: string) {
         if (sonicpiosc_connected) {
+            sendAT("AT+CIPSEND=" + (message.length + 2), 100)
+            sendAT(message, 100) // upload data
+            basic.pause(100)
+        }
+    }
+
+    /**
+    * Send OSC test message to Sonic Pi
+    */
+    //% block="Send OSC Message"
+    export function SendOSCTestMessage() {
+        if (sonicpiosc_connected) {
+            message = "\x2f\x6f\x73\x63\x69\x6c\x6c\x61\x74\x6f\x72\x2f\x34\x2f\x66\x72\x65\x71\x75\x65\x6e\x63\x79\x00\x2c\x66\x00\x00\x43\xdc\x00\x00"
             sendAT("AT+CIPSEND=" + (message.length + 2), 100)
             sendAT(message, 100) // upload data
             basic.pause(100)
