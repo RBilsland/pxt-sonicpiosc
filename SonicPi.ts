@@ -95,9 +95,9 @@ namespace SonicPI {
     export function connectSonicPiOSC(host: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"" + host + "\",4560"
+            let text = "AT+CIPSTART=\"UDP\",\"" + host + "\",4560"
             sendAT(text, 0) // connect to Sonic Pi OSC server
-            sonicpiosc_connected = true
+            sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
     }
