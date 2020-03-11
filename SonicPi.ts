@@ -95,7 +95,7 @@ namespace SonicPI {
     export function connectSonicPiOSC(host: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"UDP\",\"" + host + "\",4560"
+            let text = "AT+CIPSTART=\"TCP\",\"" + host + "\",4560"
             sendAT(text, 0) // connect to Sonic Pi OSC server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
@@ -116,17 +116,16 @@ namespace SonicPI {
 
     /**
     * Send OSC test message to Sonic Pi
-    
+    */
     //% block="Send OSC Test Message"
     export function SendOSCTestMessage() {
         if (sonicpiosc_connected) {
-            message = 0x2f + 0x6f + 0x73 + 0x63 + 0x69 + 0x6c + 0x6c + 0x61 + 0x74 + 0x6f + 0x72 + 0x2f + 0x34 + 0x2f + 0x66 + 0x72 + 0x65 + 0x71 + 0x75 + 0x65 + 0x6e + 0x63 + 0x79 + 0x00 + 0x2c + 0x66 + 0x00 + 0x00 + 0x43 + 0xdc + 0x00 + 0x00
+            message = "\u002F\u006F\u0073\u0063\u0069\u006C\u006C\u0061\u0074\u006F\u0072\u002F\u0034\u002F\u0066\u0072\u0065\u0071\u0075\u0065\u006E\u0063\u0079\u0000\u002C\u0066\u0000\u0000\u0043\u00DC\u0000\u0000"
             sendAT("AT+CIPSEND=" + (message.length + 2), 100)
             sendAT(message, 100) // upload data
             basic.pause(100)
         }
     }   
-    */
    
     /**
      * Return wifi_connected
