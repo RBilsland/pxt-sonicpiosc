@@ -148,7 +148,7 @@ namespace SonicPI {
     }
 
     /**
-     * Return sonicpiosc_connected
+     * Return LastResult
      */
     //% block="Last Result"
     export function LastResult(): string {
