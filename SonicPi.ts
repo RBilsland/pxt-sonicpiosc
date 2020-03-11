@@ -7,6 +7,7 @@ namespace SonicPI {
 
     let wifi_connected: boolean = false
     let sonicpiosc_connected: boolean = false
+    let lastResult: string = ""
     let last_upload_successful: boolean = false
     let userToken_def: string = ""
     let topic_def: string = ""
@@ -39,6 +40,9 @@ namespace SonicPI {
             serial_str += serial.readString()
             if (serial_str.length > 200)
                 serial_str = serial_str.substr(serial_str.length - 200)
+
+            lastResult = serial_str
+
             if (serial_str.includes("OK") || serial_str.includes("ALREADY CONNECTED")) {
                 result = true
                 break
@@ -141,5 +145,13 @@ namespace SonicPI {
     //% block="SonicPi OSC Connected Status"
     export function SonicPiOSCConnected(): string {
         return sonicpiosc_connected.toString()
+    }
+
+    /**
+     * Return sonicpiosc_connected
+     */
+    //% block="Last Result"
+    export function LastResult(): string {
+        return lastResult
     }
 }
