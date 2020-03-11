@@ -116,7 +116,6 @@ namespace SonicPI {
 
     /**
     * Send OSC test message to Sonic Pi
-    */
     //% block="Send OSC Test Message"
     export function SendOSCTestMessage() {
         if (sonicpiosc_connected) {
@@ -126,6 +125,7 @@ namespace SonicPI {
             basic.pause(100)
         }
     }   
+    */
    
     /**
      * Return wifi_connected
