@@ -157,11 +157,11 @@ namespace SonicPI {
     }
 
     /**
-    * Send
-    //% block="Send|Message = %message"
+    * Send Message
     */
-   export function Send(message: string) {
-        sendAT(message)
+    //% block="Send Message|Message = %message"
+    export function SendMessage(message: string) {
+        serial.writeString(message + "\u000D\u000A")
     }
 
     /**
