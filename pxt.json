@@ -4,8 +4,7 @@
     "description": "Sonic Pi Package by R.Bilsland",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "files": "github:microsoft/pxt-filesystem"
+        "core": "*"
     },
     "files": [
         "README.md",

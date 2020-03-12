@@ -38,9 +38,7 @@ namespace SonicPI {
         let result: boolean = false
         let time: number = input.runningTime()
         while (true) {
-            singleRead = serial.readString()
-            files.appendString("data.txt", singleRead)
-            serial_str += singleRead
+            serial_str += serial.readString()
             if (serial_str.length > 200)
                 serial_str = serial_str.substr(serial_str.length - 200)
 
@@ -156,5 +154,21 @@ namespace SonicPI {
     //% block="Last Result"
     export function LastResult(): string {
         return lastResult
+    }
+
+    /**
+    * Send
+    //% block="Send"
+    */
+   export function Send(message: string) {
+        sendAT(message)
+    }
+
+    /**
+     * Return Result
+     */
+    //% block="Result"
+    export function Result(): string {
+        return serial.readString()
     }
 }
