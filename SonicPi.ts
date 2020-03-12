@@ -158,7 +158,7 @@ namespace SonicPI {
 
     /**
     * Send
-    //% block="Send"
+    //% block="Send|Message = %message"
     */
    export function Send(message: string) {
         sendAT(message)
