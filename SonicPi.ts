@@ -33,11 +33,14 @@ namespace SonicPI {
 
     // wait for certain response from ESP8266
     function waitResponse(): boolean {
+        let singleRead: string=""
         let serial_str: string = ""
         let result: boolean = false
         let time: number = input.runningTime()
         while (true) {
-            serial_str += serial.readString()
+            singleRead = serial.readString()
+            files.appendString("data.txt", singleRead)
+            serial_str += singleRead
             if (serial_str.length > 200)
                 serial_str = serial_str.substr(serial_str.length - 200)
 
@@ -50,7 +53,7 @@ namespace SonicPI {
             if (serial_str.includes("ERROR") || serial_str.includes("FAIL")) {
                 break
             }
-            if (input.runningTime() - time > 5000) {
+            if (input.runningTime() - time > 10000) {
                 break
             }
         }
