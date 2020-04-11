@@ -1,14 +1,14 @@
 {
-    "name": "SonicPi",
+    "name": "Sonic Pi OSC",
     "version": "1.0.0",
-    "description": "Sonic Pi Package by R.Bilsland",
+    "description": "Sonic Pi OSC Package by R.Bilsland based on ESP8266 IoT package by ELECFREAKS, CLASSROOM and Tinkercademy.",
     "license": "MIT",
     "dependencies": {
         "core": "*"
     },
     "files": [
         "README.md",
-        "SonicPi.ts"
+        "SonicPiOSC.ts"
     ],
     "testFiles": [
         "tests.ts"
