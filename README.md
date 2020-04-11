@@ -1,1 +1,1 @@
-SonicPi OSC
+Micro:bit -> Sonic Pi OSC Server
