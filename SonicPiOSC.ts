@@ -1,8 +1,8 @@
 /**
  * Custom blocks
  */
-//% color=#0fbc11 icon="\uf1eb" weight=90
-namespace ESP8266_IoT {
+//% color=#FF1493 icon="\uf001" weight=90
+namespace SonicPiOSC {
     let wifi_connected: boolean = false
     let sonicpiosc_connected: boolean = false
 
@@ -76,6 +76,7 @@ namespace ESP8266_IoT {
         wifi_connected = waitResponse()
         basic.pause(100)
     }
+
     /**
     * Connect to Sonic Pi
     */
