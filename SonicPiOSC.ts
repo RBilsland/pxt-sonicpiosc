@@ -5,7 +5,7 @@
 namespace ESP8266_IoT {
 
     let wifi_connected: boolean = false
-    let sonicpi_connected: boolean = false
+    let sonicpiosc_connected: boolean = false
     let thingspeak_connected: boolean = false
     let kitsiot_connected: boolean = false
     let last_upload_successful: boolean = false
@@ -81,7 +81,7 @@ namespace ESP8266_IoT {
     export function connectWifi(ssid: string, pw: string) {
 
         wifi_connected = false
-        sonicpi_connected = false
+        sonicpiosc_connected = false
         thingspeak_connected = false
         kitsiot_connected = false
         sendAT("AT+CWJAP=\"" + ssid + "\",\"" + pw + "\"", 0) // connect to Wifi router
@@ -91,15 +91,15 @@ namespace ESP8266_IoT {
     /**
     * Connect to Sonic Pi
     */
-    //% block="connect sonicpi = %oscServer"
+    //% block="connect sonic pi osc = %oscServer"
     //% oscServer.defl=your_oscServer
     //% subcategory="SonicPi"
-    export function connectSonicPi(oscServer: string) {
+    export function connectSonicPiOSC(oscServer: string) {
         if (wifi_connected && kitsiot_connected == false) {
-            sonicpi_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"" + oscServer + "\",80"
+            sonicpiosc_connected = false
+            let text = "AT+CIPSTART=\"TCP\",\"" + oscServer + "\",4560"
             sendAT(text, 0) // connect to website server
-            thingspeak_connected = waitResponse()
+            sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
     }
@@ -176,6 +176,20 @@ namespace ESP8266_IoT {
     //% block="Wifi connected %State"
     export function wifiState(state: boolean) {
         if (wifi_connected == state) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    /**
+    * Check if ESP8266 successfully connected to Sonic Pi OSC
+    */
+    //% block="SonicPi OSC connected %State"
+    //% subcategory="ThingSpeak"
+    export function sonicPiOSCState(state: boolean) {
+        if (thingspeak_connected == state) {
             return true
         }
         else {
