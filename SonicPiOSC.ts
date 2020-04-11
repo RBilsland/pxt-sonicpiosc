@@ -91,18 +91,33 @@ namespace ESP8266_IoT {
     /**
     * Connect to Sonic Pi
     */
-    //% block="connect sonic pi osc = %oscServer"
-    //% oscServer.defl=your_oscServer
-    //% subcategory="SonicPi"
-    export function connectSonicPiOSC(oscServer: string) {
+    //% block="connect sonic pi osc = %server"
+    //% server.defl=your_server
+    //% subcategory="SonicPiOSC"
+    export function connectSonicPiOSC(server: string) {
         if (wifi_connected && kitsiot_connected == false) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"" + oscServer + "\",4560"
+            let text = "AT+CIPSTART=\"TCP\",\"" + server + "\",4560"
             sendAT(text, 0) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
     }
+
+    /**
+    * Check if ESP8266 successfully connected to Sonic Pi OSC
+    */
+    //% block="SonicPi OSC connected %State"
+    //% subcategory="SonicPiOSC"
+    export function sonicPiOSCState(state: boolean) {
+        if (sonicpiosc_connected == state) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
     /**
     * Connect to ThingSpeak
     */
@@ -176,20 +191,6 @@ namespace ESP8266_IoT {
     //% block="Wifi connected %State"
     export function wifiState(state: boolean) {
         if (wifi_connected == state) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-
-    /**
-    * Check if ESP8266 successfully connected to Sonic Pi OSC
-    */
-    //% block="SonicPi OSC connected %State"
-    //% subcategory="ThingSpeak"
-    export function sonicPiOSCState(state: boolean) {
-        if (thingspeak_connected == state) {
             return true
         }
         else {
