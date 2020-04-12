@@ -73,7 +73,7 @@ namespace SonicPiOSC {
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"" + server + "\",4560"
+            let text = "AT+CIPSTART=\"TCP\",\"" + server + "\",\"4560\""
             sendAT(text, 0) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
