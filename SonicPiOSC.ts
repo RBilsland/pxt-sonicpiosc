@@ -56,7 +56,7 @@ namespace SonicPiOSC {
     /**
     * connect to Wifi router
     */
-    //% block="connect wifi name = %ssid|password = %pw"
+    //% block="connect wifi|name = %ssid|password = %pw"
     export function connectWifi(ssid: string, pw: string) {
 
         wifi_connected = false
@@ -67,9 +67,9 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Connect to Sonic Pi
+    * Connect to Sonic Pi OSC
     */
-    //% block="connect sonic pi osc server address = %server"
+    //% block="connect sonic pi osc server|address = %server"
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
