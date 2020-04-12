@@ -1,17 +1,10 @@
 /**
  * Custom blocks
  */
-//% color=#FF1493 icon="\uf001" weight=90
+//% color="#FF1493" icon="\uf001" weight=90 block="Sonic Pi OSC"
 namespace SonicPiOSC {
     let wifi_connected: boolean = false
     let sonicpiosc_connected: boolean = false
-
-    export enum State {
-        //% block="Success"
-        Success,
-        //% block="Fail"
-        Fail
-    }
 
     // write AT command with CR+LF ending
     function sendAT(command: string, wait: number = 0) {
@@ -45,11 +38,9 @@ namespace SonicPiOSC {
     /**
     * Initialize ESP8266 module 
     */
-    //% block="set ESP8266|RX %tx|TX %rx|Baud rate %baudrate"
+    //% block="set ESP8266|TX = %tx|RX = %rx|baud rate = %baudrate"
     //% tx.defl=SerialPin.P8
     //% rx.defl=SerialPin.P12
-    //% ssid.defl=your_ssid
-    //% pw.defl=your_password
     export function initWIFI(tx: SerialPin, rx: SerialPin, baudrate: BaudRate) {
         serial.redirect(
             tx,
@@ -65,9 +56,7 @@ namespace SonicPiOSC {
     /**
     * connect to Wifi router
     */
-    //% block="connect Wifi SSID = %ssid|KEY = %pw"
-    //% ssid.defl=your_ssid
-    //% pw.defl=your_pw
+    //% block="connect wifi name = %ssid|password = %pw"
     export function connectWifi(ssid: string, pw: string) {
 
         wifi_connected = false
@@ -80,8 +69,7 @@ namespace SonicPiOSC {
     /**
     * Connect to Sonic Pi
     */
-    //% block="connect sonic pi osc = %server"
-    //% server.defl=your_server
+    //% block="connect sonic pi osc server address = %server"
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
@@ -96,35 +84,15 @@ namespace SonicPiOSC {
     * Check if ESP8266 successfully connected to Wifi
     */
     //% block="Wifi connected %State"
-    export function wifiState(state: boolean) {
-        if (wifi_connected == state) {
-            return true
-        }
-        else {
-            return false
-        }
+    export function wifiState(): boolean {
+        return wifi_connected
     }
 
     /**
     * Check if ESP8266 successfully connected to Sonic Pi OSC
     */
     //% block="SonicPi OSC connected %State"
-    export function sonicPiOSCState(state: boolean) {
-        if (sonicpiosc_connected == state) {
-            return true
-        }
-        else {
-            return false
-        }
+    export function sonicPiOSCState(): boolean  {
+        return sonicpiosc_connected
     }
-
-    /**
-    * Wait between uploads
-    */
-    //% block="Wait %delay ms"
-    //% delay.min=0 delay.defl=5000
-    export function wait(delay: number) {
-        if (delay > 0) basic.pause(delay)
-    }
-
 }
