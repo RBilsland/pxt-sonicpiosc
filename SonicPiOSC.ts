@@ -5,6 +5,7 @@
 namespace SonicPiOSC {
     let wifi_connected: boolean = false
     let sonicpiosc_connected: boolean = false
+    let last_send_successful: boolean = false
 
     // write AT command with CR+LF ending
     function sendAT(command: string, wait: number = 0) {
@@ -73,9 +74,24 @@ namespace SonicPiOSC {
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text = "AT+CIPSTART=\"TCP\",\"" + server + "\",\"4560\""
+            let text = "AT+CIPSTART=\"UDP\",\"" + server + "\",\"4560\""
             sendAT(text, 0) // connect to website server
             sonicpiosc_connected = waitResponse()
+            basic.pause(100)
+        }
+    }
+
+    /**
+    * Connect to Sonic Pi OSC
+    */
+    //% block="send start connection"
+    export function sendStartConnection() {
+        if (sonicpiosc_connected) {
+            last_send_successful = false
+            let toSendStr: string = '\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0'
+            sendAT("AT+CIPSEND=" + (toSendStr.length + 2), 100)
+            sendAT(toSendStr, 100) // upload data
+            last_send_successful = waitResponse()
             basic.pause(100)
         }
     }
