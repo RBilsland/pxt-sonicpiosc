@@ -49,7 +49,7 @@ namespace SonicPiOSC {
             baudrate
         )
         sendAT("AT+RESTORE", 1000) // restore to factory settings
-        sendAT("AT+CWMODE=1", 1000) // set to STA mode
+        sendAT("AT+CWMODE=1", 1) // set to STA mode
         sendAT("AT+RST", 1000) // reset
         basic.pause(100)
         files.appendLine("data.txt", "Hello")
@@ -63,7 +63,7 @@ namespace SonicPiOSC {
 
         wifi_connected = false
         sonicpiosc_connected = false
-        sendAT("AT+CWJAP=\"" + ssid + "\",\"" + pw + "\"", 0) // connect to Wifi router
+        sendAT("AT+CWJAP=\"" + ssid + "\",\"" + pw + "\"", 1) // connect to Wifi router
         wifi_connected = waitResponse()
         basic.pause(100)
     }
@@ -76,7 +76,7 @@ namespace SonicPiOSC {
         if (wifi_connected) {
             sonicpiosc_connected = false
             let text = "AT+CIPSTART=\"UDP\",\"" + server + "\",\"4560\""
-            sendAT(text, 0) // connect to website server
+            sendAT(text, 1) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
