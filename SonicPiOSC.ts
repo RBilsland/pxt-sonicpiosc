@@ -99,7 +99,7 @@ namespace SonicPiOSC {
     /**
     * Check if ESP8266 successfully connected to Wifi
     */
-    //% block="Wifi connected %State"
+    //% block="wifi connected"
     export function wifiState(): boolean {
         return wifi_connected
     }
@@ -107,8 +107,16 @@ namespace SonicPiOSC {
     /**
     * Check if ESP8266 successfully connected to Sonic Pi OSC
     */
-    //% block="SonicPi OSC connected %State"
+    //% block="sonic pi osc connected"
     export function sonicPiOSCState(): boolean  {
         return sonicpiosc_connected
+    }
+
+    /**
+    * Check if ESP8266 successfully sent the last command
+    */
+    //% block="last send successful"
+    export function lastSendSuccessful(): boolean  {
+        return last_send_successful
     }
 }
