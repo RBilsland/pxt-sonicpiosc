@@ -5,7 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "files": "github:microsoft/pxt-filesystem"
+        "filesystem": "github:microsoft/pxt-filesystem"
     },
     "files": [
         "README.md",
