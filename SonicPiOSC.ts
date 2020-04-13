@@ -49,7 +49,7 @@ namespace SonicPiOSC {
             baudrate
         )
         sendAT("AT+RESTORE", 1000) // restore to factory settings
-        sendAT("AT+CWMODE=1") // set to STA mode
+        sendAT("AT+CWMODE=1", 1000) // set to STA mode
         sendAT("AT+RST", 1000) // reset
         basic.pause(100)
         files.appendLine("data.txt", "Hello")
