@@ -52,6 +52,7 @@ namespace SonicPiOSC {
         sendAT("AT+CWMODE=1") // set to STA mode
         sendAT("AT+RST", 1000) // reset
         basic.pause(100)
+        files.appendLine("data.txt", "Hello")
     }
 
     /**
