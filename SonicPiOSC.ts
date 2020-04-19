@@ -21,7 +21,7 @@ namespace SonicPiOSC {
         let time: number = input.runningTime()
         while (true) {
             just_read = serial.readString()
-            for (let i = 0, len = just_read.length; i < len; i++) {
+            for (let i = 0; i < just_read.length; i++) {
                 basic.showString(just_read.charCodeAt(i));
             }
             serial_str += just_read
