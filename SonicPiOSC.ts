@@ -80,10 +80,10 @@ namespace SonicPiOSC {
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text="AT+CIPMUX=0"
+            let text="AT+CIPMUX=1"
             sendAT(text, 1)
             let wibble = waitResponse()
-            text = "AT+CIPSTART=\"UDP\",\"" + server + "\",4560,4560,0"
+            text = "AT+CIPSTART=4,\"UDP\",\"" + server + "\",4560,1112,0"
             sendAT(text, 1) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
