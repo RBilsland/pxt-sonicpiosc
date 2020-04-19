@@ -82,7 +82,7 @@ namespace SonicPiOSC {
             sonicpiosc_connected = false
             let text="AT+CIPMUX=0"
             sendAT(text, 1)
-            let text = "AT+CIPSTART=\"UDP\",\"" + server + "\",4560,4560,0"
+            text = "AT+CIPSTART=\"UDP\",\"" + server + "\",4560,4560,0"
             sendAT(text, 1) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
