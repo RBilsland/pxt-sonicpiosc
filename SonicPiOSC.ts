@@ -55,7 +55,7 @@ namespace SonicPiOSC {
             baudrate
         )
         sendAT("AT+RESTORE", 1000) // restore to factory settings
-        sendAT("AT+CWMODE=3", 1) // set to STA mode
+        sendAT("AT+CWMODE_CUR=1", 1) // set to STA mode
         sendAT("AT+RST", 1000) // reset
         basic.pause(100)
     }
@@ -80,10 +80,10 @@ namespace SonicPiOSC {
     export function connectSonicPiOSC(server: string) {
         if (wifi_connected) {
             sonicpiosc_connected = false
-            let text="AT+CIPMUX=1"
+            let text="AT+CIPMUX=0"
             sendAT(text, 1)
             let wibble = waitResponse()
-            text = "AT+CIPSTART=4,\"UDP\",\"" + server + "\",4560,1112,0"
+            text = "AT+CIPSTART=\"UDP\",\"" + server + "\",4560,1112,0"
             sendAT(text, 1) // connect to website server
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
