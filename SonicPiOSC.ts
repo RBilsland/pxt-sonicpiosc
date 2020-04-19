@@ -16,10 +16,15 @@ namespace SonicPiOSC {
     // wait for certain response from ESP8266
     function waitResponse(): boolean {
         let serial_str: string = ""
+        let just_read: string = ""
         let result: boolean = false
         let time: number = input.runningTime()
         while (true) {
-            serial_str += serial.readString()
+            just_read = serial.readString()
+            for (let i = 0, len = just_read.length; i < len; i++) {
+                basic.showString(just_read.charCodeAt(i));
+            }
+            serial_str += just_read
             if (serial_str.length > 200)
                 serial_str = serial_str.substr(serial_str.length - 200)
             if (serial_str.includes("OK") || serial_str.includes("ALREADY CONNECTED")) {
@@ -52,7 +57,6 @@ namespace SonicPiOSC {
         sendAT("AT+CWMODE=1", 1) // set to STA mode
         sendAT("AT+RST", 1000) // reset
         basic.pause(100)
-        files.appendLine("data.txt", "Hello")
     }
 
     /**
