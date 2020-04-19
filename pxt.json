@@ -4,8 +4,7 @@
     "description": "Sonic Pi OSC Package by R.Bilsland based on ESP8266 IoT package by ELECFREAKS, CLASSROOM and Tinkercademy.",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "filesystem": "github:microsoft/pxt-filesystem"
+        "core": "*"
     },
     "files": [
         "README.md",
