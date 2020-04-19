@@ -85,6 +85,9 @@ namespace SonicPiOSC {
             let wibble = waitResponse()
             text = "AT+CIPSTART=0,\"UDP\",\"" + server + "\",4560,4560,2"
             sendAT(text, 1) // connect to website server
+            let toSendStr: string = '\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0'
+            sendAT("AT+CIPSEND=" + (toSendStr.length + 2), 100)
+            sendAT(toSendStr, 100) // upload data
             sonicpiosc_connected = waitResponse()
             basic.pause(100)
         }
