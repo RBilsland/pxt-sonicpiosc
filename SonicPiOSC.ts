@@ -22,7 +22,7 @@ namespace SonicPiOSC {
         while (true) {
             just_read = serial.readString()
             for (let i = 0; i < just_read.length; i++) {
-                basic.showString(just_read.charCodeAt(i));
+                basic.showNumber(just_read.charCodeAt(i));
             }
             serial_str += just_read
             if (serial_str.length > 200)
