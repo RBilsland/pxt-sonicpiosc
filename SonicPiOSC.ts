@@ -9,6 +9,7 @@ namespace SonicPiOSC {
 
     // write AT command with CR+LF ending
     function sendAT(command: string, wait: number = 0) {
+        dumpString(command + "\u000D\u000A")
         serial.writeString(command + "\u000D\u000A")
         basic.pause(wait)
     }
@@ -16,25 +17,24 @@ namespace SonicPiOSC {
     // wait for certain response from ESP8266
     function waitResponse(): boolean {
         let serial_str: string = ""
-        let just_read: string = ""
         let result: boolean = false
         let time: number = input.runningTime()
         while (true) {
-            just_read = serial.readString()
-            for (let i = 0; i < just_read.length; i++) {
-                basic.showNumber(just_read.charCodeAt(i));
-            }
-            serial_str += just_read
+            serial_str += serial.readString()
+            dumpString(serial_str)
             if (serial_str.length > 200)
                 serial_str = serial_str.substr(serial_str.length - 200)
             if (serial_str.includes("OK") || serial_str.includes("ALREADY CONNECTED")) {
                 result = true
+                basic.showString("OK")
                 break
             }
             if (serial_str.includes("ERROR") || serial_str.includes("FAIL")) {
+                basic.showString("ERROR")
                 break
             }
             if (input.runningTime() - time > 10000) {
+                basic.showString("TIME")
                 break
             }
         }
@@ -123,5 +123,11 @@ namespace SonicPiOSC {
     //% block="last send successful"
     export function lastSendSuccessful(): boolean  {
         return last_send_successful
+    }
+
+    function dumpString(message: string) {
+        for (let i = 0; i < message.length; i++) {
+            basic.showNumber(message.charCodeAt(i));
+        }
     }
 }
