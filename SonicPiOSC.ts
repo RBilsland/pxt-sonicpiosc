@@ -26,23 +26,23 @@ namespace SonicPiOSC {
                 result = true
                 if (dump) {
                     dumpString(serial_str)
-                    basic.showString("OK")
                 }
+                basic.showString("OK")
                 break
             }
             if (serial_str.includes("ERROR") || serial_str.includes("FAIL")) {
                 if (dump) {
                     dumpString(serial_str)
-                    basic.showString("ERROR")
                 }
-            break
+                basic.showString("ERROR")
+                break
             }
             if (input.runningTime() - time > 100000) {
                 if (dump) {
                     dumpString(serial_str)
-                    basic.showString("TIME")
                 }
-            break
+                basic.showString("TIME")
+                break
             }
         }
         return result
