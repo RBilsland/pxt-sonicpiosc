@@ -151,7 +151,7 @@ namespace SonicPiOSC {
      */
     //% block="test communications"
     export function testCommunications(): boolean {
-        serial.writeString("AT\r\n")
+        serial.writeString("AT\u000D\u000A")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
@@ -161,12 +161,10 @@ namespace SonicPiOSC {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
                 result = true
-                basic.showString("TRUE")
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
                 result = false
-                basic.showString("FALSE")
                 break
             }
         }
