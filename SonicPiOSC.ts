@@ -149,8 +149,12 @@ namespace SonicPiOSC {
     /**
      * Test Communications with the ESP8266
      */
-    //% block="test communications"
-    export function testCommunications(): boolean {
+    //% block="test communications|TX = %tx|RX = %rx|baud rate = %baudrate"
+    //% tx.defl=SerialPin.P8
+    //% rx.defl=SerialPin.P12
+    export function testCommunications(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
+        serial.redirect(tx, rx, baudrate)    
+
         serial.writeString("AT\u000D\u000A")
 
         let startTime: number = input.runningTime()
