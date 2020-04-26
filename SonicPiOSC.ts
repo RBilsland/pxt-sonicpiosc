@@ -198,7 +198,7 @@ namespace SonicPiOSC {
      */
     //% block="client mode"
     export function clientMode(): boolean {
-        serial.writeString("AT+CWMODE=1\r\n")
+        serial.writeString("AT+CWMODE=3\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
@@ -260,10 +260,27 @@ namespace SonicPiOSC {
      */
     //% block="open udp port|address = %address|port = %port"
     export function openUDPPort(address: string, port: number): boolean {
-        serial.writeString("AT+CIPSTART=\"UDP\",\"" + address + "\"," + port + "\r\n")
+        serial.writeString("AT+CIPMUX=1\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                basic.showString("A")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        serial.writeString("AT+CIPSTART=4,\"UDP\",\"" + address + "\"," + port + ",,0\r\n")
+
+        startTime = input.runningTime()
+        returnedMessage = ""
 
         while (true) {
             returnedMessage += serial.readString()
