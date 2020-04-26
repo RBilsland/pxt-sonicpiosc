@@ -271,6 +271,8 @@ namespace SonicPiOSC {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
+                basic.showString("A")
+                basic.showString(returnedMessage)
                 return false
             }
         }
@@ -281,6 +283,8 @@ namespace SonicPiOSC {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
+                basic.showString("A")
+                basic.showString(returnedMessage)
                 return false
             }
         }
