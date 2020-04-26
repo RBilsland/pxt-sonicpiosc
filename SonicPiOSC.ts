@@ -159,11 +159,11 @@ namespace SonicPiOSC {
         serial.writeString("AT\r\n")
 
         let startTime: number = input.runningTime()
-        let returnedMessage : string = ""
+        // let returnedMessage : string = ""
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("OK")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("OK")) {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
@@ -180,11 +180,11 @@ namespace SonicPiOSC {
         serial.writeString("AT+RST\r\n")
 
         let startTime: number = input.runningTime()
-        let returnedMessage : string = ""
+        // let returnedMessage : string = ""
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("ready")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("ready")) {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
@@ -201,11 +201,11 @@ namespace SonicPiOSC {
         serial.writeString("AT+CWMODE=1\r\n")
 
         let startTime: number = input.runningTime()
-        let returnedMessage : string = ""
+        // let returnedMessage : string = ""
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("OK")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("OK")) {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
@@ -222,11 +222,11 @@ namespace SonicPiOSC {
         serial.writeString("AT+CWJAP=\"" + ssid + "\",\"" + password + "\"\r\n")
 
         let startTime: number = input.runningTime()
-        let returnedMessage : string = ""
+        // let returnedMessage : string = ""
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("WIFI CONNECTED")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("WIFI CONNECTED")) {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
@@ -235,8 +235,8 @@ namespace SonicPiOSC {
         }
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("WIFI GOT IP")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("WIFI GOT IP")) {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
@@ -245,8 +245,8 @@ namespace SonicPiOSC {
         }
 
         while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("OK")) {
+            // returnedMessage += serial.readString()
+            if (serial.readString().includes("OK")) {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
