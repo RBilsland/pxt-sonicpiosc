@@ -277,7 +277,6 @@ namespace SonicPiOSC {
             }
         }
 
-        basic.showString("AT+CIPSTART=\"UDP\",\"" + address + "\"," + port + ",44553,0\r\n")
         serial.writeString("AT+CIPSTART=\"UDP\",\"" + address + "\"," + port + ",44553,0\r\n")
 
         startTime = input.runningTime()
