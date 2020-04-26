@@ -260,7 +260,7 @@ namespace SonicPiOSC {
      */
     //% block="open udp port|address = %address|port = %port"
     export function openUDPPort(address: string, port: number): boolean {
-        serial.writeString("AT+CIPMUX=1\r\n")
+        serial.writeString("AT+CIPMUX=0\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
@@ -277,7 +277,8 @@ namespace SonicPiOSC {
             }
         }
 
-        serial.writeString("AT+CIPSTART=4,\"UDP\",\"" + address + "\"," + port + ",44553,0\r\n")
+        basic.showString("AT+CIPSTART=\"UDP\",\"" + address + "\"," + port + ",44553,0\r\n")
+        serial.writeString("AT+CIPSTART=\"UDP\",\"" + address + "\"," + port + ",44553,0\r\n")
 
         startTime = input.runningTime()
         returnedMessage = ""
