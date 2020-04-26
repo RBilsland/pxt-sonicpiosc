@@ -160,21 +160,16 @@ namespace SonicPiOSC {
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
-        let result: boolean = false
 
         while (true) {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
-                result = true
-                break
+                return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
-                result = false
-                break
+                return false
             }
         }
-
-        return result
     }
 
     /**
@@ -186,21 +181,16 @@ namespace SonicPiOSC {
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
-        let result: boolean = false
 
         while (true) {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("ready")) {
-                result = true
-                break
+                return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
-                result = false
-                break
+                return false
             }
         }
-
-        return result
     }
 
     /**
@@ -212,20 +202,57 @@ namespace SonicPiOSC {
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
-        let result: boolean = false
 
         while (true) {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
-                result = true
+                return true
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
+    }
+
+    /**
+     * Join an access point
+     */
+    //% block="join access point|name = %ssid|password = %pw"
+    //% block="connect wifi|name = %ssid|password = %pw"
+    export function joinAccessPoint(ssid: string, pw: string): boolean {
+        serial.writeString("AT+CWJAP=\"" + ssid + "\",\"" + password + "\"\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("WIFI CONNECTED")) {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
-                result = false
-                break
+                return false
             }
         }
 
-        return result
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("WIFI GOT IP")) {
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                return true
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
     }
 }
