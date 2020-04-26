@@ -159,6 +159,7 @@ namespace SonicPiOSC {
 
         while (true) {
             returnedMessage += serial.readString()
+            basic.showString(returnedMessage)
             if (returnedMessage.includes("OK")) {
                 result = true
                 break
