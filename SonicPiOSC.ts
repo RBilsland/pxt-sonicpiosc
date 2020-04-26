@@ -7,6 +7,8 @@ namespace SonicPiOSC {
     let sonicpiosc_connected: boolean = false
     let last_send_successful: boolean = false
 
+    let maximumCommandTimeout: number = 10000
+
     // write AT command with CR+LF ending
     function sendAT(command: string, wait: number = 0) {
         serial.writeString(command + "\u000D\u000A")
@@ -143,4 +145,32 @@ namespace SonicPiOSC {
             basic.showNumber(message.charCodeAt(i));
         }
     }
+
+    /**
+     * Test Communications with the ESP8266
+     */
+    //% block="test communications"
+    export function testCommunications(): boolean {
+        serial.writeString("AT\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+        let result: boolean = false
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                result = true
+                basic.showString("TRUE")
+                break
+            }
+            if (InputDeviceInfo.runningTime() - startTime > maximumCommandTimeout) {
+                result = false
+                basic.showString("FALSE")
+                break
+            }
+        }
+
+        return result
+    }      
 }
