@@ -217,9 +217,8 @@ namespace SonicPiOSC {
     /**
      * Join an access point
      */
-    //% block="join access point|name = %ssid|password = %pw"
-    //% block="connect wifi|name = %ssid|password = %pw"
-    export function joinAccessPoint(ssid: string, pw: string): boolean {
+    //% block="join access point|name = %ssid|password = %password"
+    export function joinAccessPoint(ssid: string, password: string): boolean {
         serial.writeString("AT+CWJAP=\"" + ssid + "\",\"" + password + "\"\r\n")
 
         let startTime: number = input.runningTime()
