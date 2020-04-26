@@ -207,7 +207,7 @@ namespace SonicPiOSC {
      * Set the ESP8266 client mode
      */
     //% block="client mode"
-    export function reset(): boolean {
+    export function clientMode(): boolean {
         serial.writeString("AT+CWMODE=1\r\n")
 
         let startTime: number = input.runningTime()
