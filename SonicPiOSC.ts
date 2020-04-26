@@ -164,7 +164,6 @@ namespace SonicPiOSC {
 
         while (true) {
             returnedMessage += serial.readString()
-            basic.showString(returnedMessage)
             if (returnedMessage.includes("OK")) {
                 result = true
                 break
@@ -176,5 +175,57 @@ namespace SonicPiOSC {
         }
 
         return result
-    }      
+    }
+
+    /**
+     * Reset the ESP8266
+     */
+    //% block="reset"
+    export function reset(): boolean {
+        serial.writeString("AT+RST\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+        let result: boolean = false
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("ready")) {
+                result = true
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                result = false
+                break
+            }
+        }
+
+        return result
+    }
+
+    /**
+     * Set the ESP8266 client mode
+     */
+    //% block="client mode"
+    export function reset(): boolean {
+        serial.writeString("AT+CWMODE=1\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+        let result: boolean = false
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                result = true
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                result = false
+                break
+            }
+        }
+
+        return result
+    }
 }
