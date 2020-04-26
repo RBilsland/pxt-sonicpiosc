@@ -155,7 +155,8 @@ namespace SonicPiOSC {
     export function testCommunications(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
         serial.redirect(tx, rx, baudrate)    
 
-        serial.writeString("AT\u000D\u000A")
+        serial.writeString("AT+RESTORE\r\n")
+        serial.writeString("AT\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
