@@ -164,7 +164,7 @@ namespace SonicPiOSC {
                 basic.showString("TRUE")
                 break
             }
-            if (InputDeviceInfo.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
                 result = false
                 basic.showString("FALSE")
                 break
