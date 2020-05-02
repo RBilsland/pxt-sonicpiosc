@@ -198,8 +198,6 @@ namespace SonicPiOSC {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
-                basic.showString("A")
-                basic.showString(returnedMessage)
                 return false
             }
         }
@@ -210,19 +208,32 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Connect to Sonic Pi OSC
+    * Send Test Command
     */
-    //% block="send start connection"
-    // export function sendStartConnection() {
-    //     if (sonicpiosc_connected) {
-    //         last_send_successful = false
-    //         let toSendStr: string = '\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0'
-    //         sendAT("AT+CIPSEND=" + (toSendStr.length + 2), 100)
-    //         sendAT(toSendStr, 100) // upload data
-    //         last_send_successful = waitResponse(true)
-    //         basic.pause(100)
-    //     }
-    // }
+    //% block="send test command"
+    export function sendTestCommand(): boolean {
+        if (osc_connected_state) {
+            let testCommand: string = '\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0'
+
+            sendAT("AT+CIPSEND=" + (testCommand.length + 2), 100)
+            sendAT(testCommand, 100)
+
+            let startTime: number = input.runningTime()
+            let returnedMessage : string = ""
+    
+            while (true) {
+                returnedMessage += serial.readString()
+                if (returnedMessage.includes("OK")) {
+                    break
+                }
+                if (input.runningTime() - startTime > maximumCommandTimeout) {
+                    return false
+                }
+            }
+    
+            return true
+        }
+    }
 
     // function dumpString(message: string) {
     //     for (let i = 0; i < message.length; i++) {
