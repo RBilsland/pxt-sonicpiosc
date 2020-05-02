@@ -247,7 +247,7 @@ namespace SonicPiOSC {
         let abc : boolean = false
 
         while (true) {
-            basic.showString(serial.readString)
+            basic.showString(serial.readString())
 
             if(abc) {
                 break
