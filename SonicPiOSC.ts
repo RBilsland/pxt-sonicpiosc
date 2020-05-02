@@ -362,6 +362,7 @@ namespace SonicPiOSC {
         while (true) {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
+                basic.showString(returnedMessage)
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
