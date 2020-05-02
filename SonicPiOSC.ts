@@ -310,7 +310,7 @@ namespace SonicPiOSC {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
                 basic.showString("OK")
-                break
+                return true
             }
             if (input.runningTime() - startTime > 600000) {
                 basic.showString("4F")
