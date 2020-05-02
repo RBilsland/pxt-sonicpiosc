@@ -218,11 +218,28 @@ namespace SonicPiOSC {
 
         let testCommand: string = "\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0"
 
+        basic.showString("AT+CIPSEND=" + testCommand.length + "\r\n")
+
         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
-        serial.writeString(testCommand)
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes(">")) {
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
+
+        basic.showString(returnedMessage)
+
+        basic.showString(testCommand)
+
+        serial.writeString(testCommand)
 
         while (true) {
             returnedMessage += serial.readString()
@@ -234,6 +251,8 @@ namespace SonicPiOSC {
             }
         }
     
+        basic.showString(returnedMessage)
+
         return true
     }
 
