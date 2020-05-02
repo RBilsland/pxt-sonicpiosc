@@ -155,14 +155,26 @@ namespace SonicPiOSC {
     export function testCommunications(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
         serial.redirect(tx, rx, baudrate)    
 
-        serial.writeString("AT+UART_CUR?\r\n")
-
-
-        // serial.writeString("AT+RESTORE\r\n")
-        // serial.writeString("AT\r\n")
+        serial.writeString("AT+RESTORE\r\n")
+        serial.writeString("AT\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
+
+        serial.writeString("AT+UART_CUR?\r\n")
+
+        startTime = input.runningTime()
+         returnedMessage = ""
 
         while (true) {
             returnedMessage += serial.readString()
@@ -171,9 +183,11 @@ namespace SonicPiOSC {
                 return true
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
+                basic.showString(returnedMessage)
                 return false
             }
         }
+
     }
 
     /**
