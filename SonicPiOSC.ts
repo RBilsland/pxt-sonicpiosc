@@ -246,9 +246,11 @@ namespace SonicPiOSC {
 
         while (true) {
             basic.showString(serial.readString)
-        }
 
-        return true
+            if(1 == 2) {
+                return true
+            }
+        }
     }
 
      /**
