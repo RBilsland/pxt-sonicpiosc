@@ -154,6 +154,7 @@ namespace SonicPiOSC {
     //% rx.defl=SerialPin.P12
     export function testCommunications(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
         serial.redirect(tx, rx, baudrate)    
+        serial.setRxBufferSize(64)
 
         serial.writeString("AT+RESTORE\r\n")
         serial.writeString("AT\r\n")
@@ -171,24 +172,24 @@ namespace SonicPiOSC {
             }
         }
 
-        serial.writeString("AT+UART_CUR=9600,8,1,0,0\r\n")
+        // serial.writeString("AT+UART_CUR=9600,8,1,0,0\r\n")
 
-        startTime = input.runningTime()
-         returnedMessage = ""
+        // startTime = input.runningTime()
+        //  returnedMessage = ""
 
-        while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("OK")) {
-                basic.showString(returnedMessage)
-                break
-            }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
-                basic.showString(returnedMessage)
-                return false
-            }
-        }
+        // while (true) {
+        //     returnedMessage += serial.readString()
+        //     if (returnedMessage.includes("OK")) {
+        //         basic.showString(returnedMessage)
+        //         break
+        //     }
+        //     if (input.runningTime() - startTime > maximumCommandTimeout) {
+        //         basic.showString(returnedMessage)
+        //         return false
+        //     }
+        // }
 
-        serial.redirect(tx, rx, 9600)   
+        // serial.redirect(tx, rx, 9600)   
 
         return true
     }
