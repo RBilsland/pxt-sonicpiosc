@@ -244,13 +244,17 @@ namespace SonicPiOSC {
     export function update(): boolean {
         serial.writeString("AT+CIUPDATE\r\n")
 
+        let abc : boolean = false
+
         while (true) {
             basic.showString(serial.readString)
 
-            if(1 == 2) {
-                return true
+            if(abc) {
+                break
             }
         }
+
+        return true
     }
 
      /**
