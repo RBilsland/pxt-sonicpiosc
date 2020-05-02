@@ -244,9 +244,7 @@ namespace SonicPiOSC {
             }
         }
     
-        serial.writeString(testCommand)
-
-        basic.showString(serial.readString())
+        serial.writeString(testCommand + "\r\n")
 
         return true
     }
