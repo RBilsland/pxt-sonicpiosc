@@ -171,7 +171,7 @@ namespace SonicPiOSC {
             }
         }
 
-        serial.writeString("AT+UART_CUR=9600,8,1,0,3\r\n")
+        serial.writeString("AT+UART_CUR=9600,8,1,0,0\r\n")
 
         startTime = input.runningTime()
          returnedMessage = ""
