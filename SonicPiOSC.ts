@@ -216,10 +216,8 @@ namespace SonicPiOSC {
              return false
         }
 
-        let testCommand: string = "\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0"
-
-        basic.showString("AT+CIPSEND=" + testCommand.length + "\r\n")
-
+        let testCommand: string = "\x2f\x6f\x73\x63\x43\x6f\x6e\x74\x72\x6f\x6c\x2f\x73\x74\x61\x72\x74\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x2f\x00\x00\x00\x00\x2c\x73\x69\x73\x00\x00\x00\x00\x31\x39\x32\x2e\x31\x36\x38\x2e\x31\x2e\x32\x34\x36\x00\x00\x00\x00\x00\x11\xd0\x4f\x4b\x00\x00"
+        
         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
         let startTime: number = input.runningTime()
@@ -227,34 +225,28 @@ namespace SonicPiOSC {
 
         while (true) {
             returnedMessage += serial.readString()
-            if (returnedMessage.includes(">")) {
-                break
-            }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
-                basic.showString("No >")
-                return false
-            }
-        }
-
-        basic.showString(returnedMessage)
-
-        basic.showString(testCommand)
-
-        serial.writeString(testCommand)
-
-        while (true) {
-            returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
                 break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
-                basic.showString("No OK")
+                return false
+            }
+        }
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes(">")) {
+                break
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
 
                 return false
             }
         }
     
-        basic.showString(returnedMessage)
+        serial.writeString(testCommand)
+
+        basic.showString(serial.readString())
 
         return true
     }
