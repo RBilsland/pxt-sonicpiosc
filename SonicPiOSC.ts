@@ -198,7 +198,7 @@ namespace SonicPiOSC {
      */
     //% block="client mode"
     export function clientMode(): boolean {
-        serial.writeString("AT+CWMODE=3\r\n")
+        serial.writeString("AT+CWMODE=1\r\n")
 
         let startTime: number = input.runningTime()
         let returnedMessage : string = ""
@@ -215,6 +215,112 @@ namespace SonicPiOSC {
     }
 
     /**
+     * Set the ESP8266 version
+     */
+    //% block="version"
+    export function version(): boolean {
+        serial.writeString("AT+GMR\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                basic.showString(returnedMessage)
+                return true
+            }
+            if (input.runningTime() - startTime > maximumCommandTimeout) {
+                return false
+            }
+        }
+    }
+
+    /**
+     * update
+     */
+    //% block="update"
+    export function update(): boolean {
+        serial.writeString("AT+CIUPDATE\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("CIPUPDATE:1")) {
+                basic.showString("1OK")
+                break
+            }
+            if (input.runningTime() - startTime > 600000) {
+                basic.showString("1F")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        startTime = input.runningTime()
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("CIPUPDATE:2")) {
+                basic.showString("2OK")
+                break
+            }
+            if (input.runningTime() - startTime > 600000) {
+                basic.showString("2F")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        startTime = input.runningTime()
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("CIPUPDATE:3")) {
+                basic.showString("3OK")
+                break
+            }
+            if (input.runningTime() - startTime > 600000) {
+                basic.showString("3F")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        startTime = input.runningTime()
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("CIPUPDATE:4")) {
+                basic.showString("4OK")
+                break
+            }
+            if (input.runningTime() - startTime > 600000) {
+                basic.showString("4F")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        startTime = input.runningTime()
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                basic.showString("OK")
+                break
+            }
+            if (input.runningTime() - startTime > 600000) {
+                basic.showString("4F")
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+    }
+
+     /**
      * Join an access point
      */
     //% block="join access point|name = %ssid|password = %password"
