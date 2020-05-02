@@ -211,7 +211,7 @@ namespace SonicPiOSC {
     * Send Test Command
     */
     //% block="send test command"
-    // export function sendTestCommand(): boolean {
+    export function sendTestCommand(): boolean {
     //     if (osc_connected_state) {
             // let testCommand: string = "\u002f\u006f\u0073\u0063\u0043\u006f\u006e\u0074\u0072\u006f\u006c\u002f\u0073\u0074\u0061\u0072\u0074\u0043\u006f\u006e\u006e\u0065\u0063\u0074\u0069\u006f\u006e\u002f\u0000\u0000\u0000\u0000\u002c\u0073\u0069\u0073\u0000\u0000\u0000\u0000\u0031\u0039\u0032\u002e\u0031\u0036\u0038\u002e\u0031\u002e\u0032\u0034\u0036\u0000\u0000\u0000\u0000\u0000\u0011\u00d0"
 
@@ -231,9 +231,9 @@ namespace SonicPiOSC {
             //     }
             // }
     
-    //         return true
+            return true
     //     }
-    // }
+    }
 
     // function dumpString(message: string) {
     //     for (let i = 0; i < message.length; i++) {
