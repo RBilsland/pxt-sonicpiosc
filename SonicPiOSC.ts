@@ -171,7 +171,7 @@ namespace SonicPiOSC {
             }
         }
 
-        serial.writeString("AT+UART_CUR?\r\n")
+        serial.writeString("AT+UART_CUR=9600,8,1,0,3\r\n")
 
         startTime = input.runningTime()
          returnedMessage = ""
@@ -180,7 +180,7 @@ namespace SonicPiOSC {
             returnedMessage += serial.readString()
             if (returnedMessage.includes("OK")) {
                 basic.showString(returnedMessage)
-                return true
+                break
             }
             if (input.runningTime() - startTime > maximumCommandTimeout) {
                 basic.showString(returnedMessage)
@@ -188,6 +188,9 @@ namespace SonicPiOSC {
             }
         }
 
+        serial.redirect(tx, rx, 9600)   
+
+        return true
     }
 
     /**
