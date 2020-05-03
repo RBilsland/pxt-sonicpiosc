@@ -46,7 +46,7 @@ namespace SonicPiOSC {
         osc_connected_state = false
 
         serial.redirect(tx, rx, baudrate)    
-        serial.setRxBufferSize(64)
+        serial.setRxBufferSize(128)
 
         serial.writeString("AT+RESTORE\r\n")
         serial.writeString("AT\r\n")
