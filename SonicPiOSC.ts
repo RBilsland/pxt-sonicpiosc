@@ -47,6 +47,7 @@ namespace SonicPiOSC {
 
         serial.redirect(tx, rx, baudrate)    
         serial.setRxBufferSize(128)
+        serial.setTxBufferSize(128)
 
         serial.writeString("AT+RESTORE\r\n")
         serial.writeString("AT\r\n")
