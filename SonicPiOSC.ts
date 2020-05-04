@@ -223,9 +223,69 @@ namespace SonicPiOSC {
         let testCommand = pins.createBuffer(5);
         testCommand.setNumber(NumberFormat.Int8LE, 0, 0x2F)
         testCommand.setNumber(NumberFormat.Int8LE, 1, 0x6F)
-        testCommand.setNumber(NumberFormat.Int8LE, 2, 0x73)
+        testCommand.setNumber(NumberFormat.Int8LE, 2, 0x00)
         testCommand.setNumber(NumberFormat.Int8LE, 3, 0x63)
         testCommand.setNumber(NumberFormat.Int8LE, 4, 0x43)
+
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x6f)
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x6e) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x74)
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x72)
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x6f)
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x6c)
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x2f) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x73) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x74) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x61) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x72) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x74) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x43) 
+        // testCommand.setNumber(NumberFormat.Int8LE, 0, 0x6f) 
+        // 0x6e, 
+        // 0x6e, 
+        // 0x65, 
+        // 0x63, 
+        // 0x74, 
+        // 0x69, 
+        // 0x6f, 
+        // 0x6e, 
+        // 0x2f, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x2c, 
+        // 0x73, 
+        // 0x69, 
+        // 0x73, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x31, 
+        // 0x39, 
+        // 0x32, 
+        // 0x2e, 
+        // 0x31, 
+        // 0x36, 
+        // 0x38, 
+        // 0x2e, 
+        // 0x31, 
+        // 0x2e, 
+        // 0x32, 
+        // 0x34, 
+        // 0x36, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x00, 
+        // 0x11, 
+        // 0xd0, 
+        // 0x4f, 
+        // 0x4b, 
+        // 0x00, 
+        // 0x00
 
         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
