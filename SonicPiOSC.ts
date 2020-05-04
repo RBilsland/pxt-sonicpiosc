@@ -219,8 +219,14 @@ namespace SonicPiOSC {
 
         // let testCommand: Array<number> = [0x2f, 0x6f, 0x73, 0x63, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x2f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x73, 0x69, 0x73, 0x00, 0x00, 0x00, 0x00, 0x31, 0x39, 0x32, 0x2e, 0x31, 0x36, 0x38, 0x2e, 0x31, 0x2e, 0x32, 0x34, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0xd0, 0x4f, 0x4b, 0x00, 0x00]
         // let testCommand: string = "\x2f\x6f\x73\x63\x43\x6f\x6e\x74\x72\x6f\x6c\x2f\x73\x74\x61\x72\x74\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x2f\x00\x00\x00\x00\x2c\x73\x69\x73\x00\x00\x00\x00\x31\x39\x32\x2e\x31\x36\x38\x2e\x31\x2e\x32\x34\x36\x00\x00\x00\x00\x00\x11\xd0\x4f\x4b\x00\x00"
-        let testCommand: string = "TestCommand"
-        
+        // let testCommand: string = "TestCommand"
+        let testCommand = pins.createBuffer(5);
+        testCommand.setNumber(NumberFormat.Int8LE, 0, 65)
+        testCommand.setNumber(NumberFormat.Int8LE, 1, 66)
+        testCommand.setNumber(NumberFormat.Int8LE, 2, 67)
+        testCommand.setNumber(NumberFormat.Int8LE, 3, 68)
+        testCommand.setNumber(NumberFormat.Int8LE, 4, 69)
+
         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
         let startTime: number = input.runningTime()
@@ -248,8 +254,9 @@ namespace SonicPiOSC {
             }
         }
 
-        serial.writeString(testCommand)
+        // serial.writeString(testCommand)
         // serial.writeNumbers(testCommand)
+        serial.writeBuffer(testCommand);
 
         // while (true) {
         //     returnedMessage += serial.readString()
