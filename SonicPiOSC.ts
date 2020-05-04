@@ -221,11 +221,11 @@ namespace SonicPiOSC {
         // let testCommand: string = "\x2f\x6f\x73\x63\x43\x6f\x6e\x74\x72\x6f\x6c\x2f\x73\x74\x61\x72\x74\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x2f\x00\x00\x00\x00\x2c\x73\x69\x73\x00\x00\x00\x00\x31\x39\x32\x2e\x31\x36\x38\x2e\x31\x2e\x32\x34\x36\x00\x00\x00\x00\x00\x11\xd0\x4f\x4b\x00\x00"
         // let testCommand: string = "TestCommand"
         let testCommand = pins.createBuffer(5);
-        testCommand.setNumber(NumberFormat.Int8LE, 0, 65)
-        testCommand.setNumber(NumberFormat.Int8LE, 1, 66)
-        testCommand.setNumber(NumberFormat.Int8LE, 2, 67)
-        testCommand.setNumber(NumberFormat.Int8LE, 3, 68)
-        testCommand.setNumber(NumberFormat.Int8LE, 4, 69)
+        testCommand.setNumber(NumberFormat.Int8LE, 0, 0x2F)
+        testCommand.setNumber(NumberFormat.Int8LE, 1, 0x6F)
+        testCommand.setNumber(NumberFormat.Int8LE, 2, 0x73)
+        testCommand.setNumber(NumberFormat.Int8LE, 3, 0x63)
+        testCommand.setNumber(NumberFormat.Int8LE, 4, 0x43)
 
         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
