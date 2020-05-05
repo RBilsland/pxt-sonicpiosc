@@ -53,22 +53,6 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Return the WiFi Connected state
-    */
-    //% block="wifi connected state"
-    export function wifiConnectedState(): boolean {
-        return wifi_connected_state
-    }
-
-    /**
-    * Return the OSC Connected State
-    */
-    //% block="osc connected state"
-    export function sonicPiOSCState(): boolean  {
-        return osc_connected_state
-    }
-
-    /**
      * Initialise the ESP8266
      */
     //% block="initialise|TX = %tx|RX = %rx|baud rate = %baudrate"
@@ -126,6 +110,14 @@ namespace SonicPiOSC {
         }
 
         return true
+    }
+
+    /**
+    * Return the WiFi Connected state
+    */
+    //% block="wifi connected state"
+    export function wifiConnectedState(): boolean {
+        return wifi_connected_state
     }
 
      /**
@@ -202,9 +194,18 @@ namespace SonicPiOSC {
     }
 
     /**
+    * Return the OSC Connected State
+    */
+    //% block="osc connected state"
+    export function sonicPiOSCState(): boolean  {
+        return osc_connected_state
+    }
+
+    /**
      * Connect to OSC
      */
     //% block="connect osc|server = %server|port = %port"
+    //% port.defl=4560
     export function connectOSC(server: string, port: number) {
         osc_connected_state = false
 
