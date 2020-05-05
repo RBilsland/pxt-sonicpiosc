@@ -8,7 +8,7 @@ namespace SonicPiOSC {
     let osc_connected_state: boolean = false
 
     let number_of_retries: number = 1
-    let maximumCommandTimeout: number = 10000
+    let command_timeout: number = 10000
 
     /**
     * Return the number of retries
@@ -25,6 +25,23 @@ namespace SonicPiOSC {
     //% %number.defl=1
     export function setNumberOfRetries(number: number) {
         number_of_retries = number
+    }
+
+    /**
+    * Return the command timeout
+    */
+    //% block="command timeout (ms)"
+    export function commandTimeout(): number {
+        return command_timeout
+    }
+
+    /**
+     * Set the command timeout
+     */
+    //% block="set command timeout (ms)|= %number"
+    //% %number.defl=10000
+    export function setCommandTimeout(number: number) {
+        command_timeout = number
     }
 
     /**
@@ -58,11 +75,21 @@ namespace SonicPiOSC {
     //% tx.defl=SerialPin.P8
     //% rx.defl=SerialPin.P12
     //% baudrate.defl=BaudRate.BaudRate115200
-    export function initialise(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
+    export function initialise(tx: SerialPin, rx: SerialPin, baudrate: BaudRate) {
+        let retry_count = 0
+
         initialised_state = false
         wifi_connected_state = false
         osc_connected_state = false
 
+        while (!initialised_state && retry_count < number_of_retries) {
+            initialised_state = performInitialise(tx, rx, baudrate)
+
+            retry_count++
+        }
+    }
+
+    function performInitialise(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): boolean {
         serial.redirect(tx, rx, baudrate)    
         serial.setRxBufferSize(128)
         serial.setTxBufferSize(128)
@@ -78,7 +105,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -93,12 +120,10 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("ready")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
-
-        initialised_state = true
 
         return true
     }
@@ -107,14 +132,22 @@ namespace SonicPiOSC {
      * Connect to WiFi
      */
     //% block="connect WiFi|name = %ssid|password = %password"
-    export function connectWiFi(ssid: string, password: string): boolean {
+    export function connectWiFi(ssid: string, password: string) {
         wifi_connected_state = false
         osc_connected_state = false
 
-        if (!initialised_state) {
-            return false
+        if (initialised_state) {
+            let retry_count = 0
+
+            while (!wifi_connected_state && retry_count < number_of_retries) {
+                wifi_connected_state = performConnectWiFi(ssid, password)
+
+                retry_count++
+            }
         }
-        
+    }
+
+    export function performConnectWiFi(ssid: string, password: string): boolean {
         serial.writeString("AT+CWMODE=1\r\n")
 
         let startTime: number = input.runningTime()
@@ -125,7 +158,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -140,7 +173,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("WIFI CONNECTED")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -150,7 +183,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("WIFI GOT IP")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -160,12 +193,10 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
-
-        wifi_connected_state = true
 
         return true
     }
@@ -174,13 +205,21 @@ namespace SonicPiOSC {
      * Connect to OSC
      */
     //% block="connect osc|server = %server|port = %port"
-    export function connectOSC(server: string, port: number): boolean {
+    export function connectOSC(server: string, port: number) {
         osc_connected_state = false
 
-        if (!initialised_state || !wifi_connected_state) {
-            return false
-        }
+        if (initialised_state && wifi_connected_state) {
+            let retry_count = 0
 
+            while (!wifi_connected_state && retry_count < number_of_retries) {
+                osc_connected_state = performConnectOSC(server, port)
+
+                retry_count++
+            }
+        }
+    }
+
+    export function performConnectOSC(server: string, port: number): boolean {
         serial.writeString("AT+CIPMUX=0\r\n")
 
         let startTime: number = input.runningTime()
@@ -191,7 +230,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -206,7 +245,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("CONNECT")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
@@ -216,12 +255,10 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 return false
             }
         }
-
-        osc_connected_state = true
 
         return true
     }
@@ -314,7 +351,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes("OK")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 basic.showString(returnedMessage)
                 return false
             }
@@ -325,7 +362,7 @@ namespace SonicPiOSC {
             if (returnedMessage.includes(">")) {
                 break
             }
-            if (input.runningTime() - startTime > maximumCommandTimeout) {
+            if (input.runningTime() - startTime > command_timeout) {
                 basic.showString(returnedMessage)
                 return false
             }
