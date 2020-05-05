@@ -139,7 +139,7 @@ namespace SonicPiOSC {
         }
     }
 
-    export function performConnectWiFi(ssid: string, password: string): boolean {
+    function performConnectWiFi(ssid: string, password: string): boolean {
         serial.writeString("AT+CWMODE=1\r\n")
 
         let startTime: number = input.runningTime()
@@ -212,7 +212,7 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state) {
             let retry_count = 0
 
-            while (!wifi_connected_state && retry_count < number_of_retries) {
+            while (!osc_connected_state && retry_count < number_of_retries) {
                 osc_connected_state = performConnectOSC(server, port)
 
                 retry_count++
@@ -220,7 +220,7 @@ namespace SonicPiOSC {
         }
     }
 
-    export function performConnectOSC(server: string, port: number): boolean {
+    function performConnectOSC(server: string, port: number): boolean {
         serial.writeString("AT+CIPMUX=0\r\n")
 
         let startTime: number = input.runningTime()
