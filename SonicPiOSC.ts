@@ -7,6 +7,8 @@ namespace SonicPiOSC {
     let wifi_connected_state: boolean = false
     let osc_connected_state: boolean = false
 
+    //% blockCombine block="retries"
+    let retries: number = 1
     let maximumCommandTimeout: number = 10000
 
     /**
