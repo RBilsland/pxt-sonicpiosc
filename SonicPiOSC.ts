@@ -10,9 +10,9 @@ namespace SonicPiOSC {
     let number_of_retries: number = 1
     let command_timeout: number = 10000
 
-    let address_buffer: object
-    let tag_buffer: object
-    let parameter_buffer: object
+    let address_buffer
+    let tag_buffer
+    let parameter_buffer
 
     /**
     * Return the number of retries
