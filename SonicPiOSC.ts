@@ -300,10 +300,10 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
-            new_tag_buffer.write(0, tag_buffer)
-            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 73)
+            // new_tag_buffer.write(0, tag_buffer)
+            // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 73)
 
-            tag_buffer = new_tag_buffer
+            // tag_buffer = new_tag_buffer
 
             // let parameter_value_length = (Math.trunc(value.length / 4) + 1) * 4
             // let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
