@@ -281,7 +281,7 @@ namespace SonicPiOSC {
 
             for (let buffer_position = 0; buffer_position < address.length; buffer_position++)
             {
-                address_buffer.setNumber(NumberFormat.Int8E, buffer_position, address.charCodeAt(buffer_position))
+                address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, address.charCodeAt(buffer_position))
             }
 
             // let buffer_position: number = 0
