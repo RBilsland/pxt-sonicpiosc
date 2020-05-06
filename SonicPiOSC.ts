@@ -311,11 +311,11 @@ namespace SonicPiOSC {
             new_parameter_buffer.fill(0)
             new_parameter_buffer.write(0, parameter_buffer)
 
-            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
-            // }
+            for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
+                new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
+            }
 
-            // parameter_buffer = new_parameter_buffer
+            parameter_buffer = new_parameter_buffer
         }
     }
 
@@ -348,13 +348,13 @@ namespace SonicPiOSC {
     export function performSendCommand(): boolean {
         let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
 
-        let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
-        // let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length + parameter_buffer.length)
+        // let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
+        let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length + parameter_buffer.length)
         send_buffer.fill(0)
 
         send_buffer.write(0, address_buffer)
         send_buffer.write(address_buffer.length, tag_buffer)
-        // send_buffer.write(address_buffer.length + tag_buffer.length, parameter_buffer)
+        send_buffer.write(address_buffer.length + tag_buffer.length, parameter_buffer)
 
         serial.writeString("AT+CIPSEND=" + send_buffer.length + "\r\n")
 
