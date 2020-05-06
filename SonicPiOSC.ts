@@ -276,8 +276,13 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let address_buffer_length = (Math.trunc(address.length / 4) + 1) * 4
 
-            address_buffer = pins.createBuffer(address_buffer_length + 1)
+            address_buffer = pins.createBuffer(address_buffer_length)
             address_buffer.fill(0)
+
+            for (var buffer_position = 0; buffer_position < address.length; buffer_position++)
+            {
+                address_buffer.setNumber(NumberFormat.Int8E, buffer_position, address.charCodeAt(buffer_position))
+            }
 
             // let buffer_position: number = 0
 
