@@ -289,6 +289,8 @@ namespace SonicPiOSC {
 
             tag_buffer = pins.createBuffer(1)
             tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
+
+            parameter_buffer = pins.createBuffer(0)
         }
     }
 
