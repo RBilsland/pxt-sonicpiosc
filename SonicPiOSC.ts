@@ -296,7 +296,7 @@ namespace SonicPiOSC {
      * Add String Parameter
      */
     //% block="add string parameter|string = %value"
-    export function addStringParameter(valie: string) {
+    export function addStringParameter(value: string) {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
