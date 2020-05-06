@@ -302,34 +302,34 @@ namespace SonicPiOSC {
             send_buffer.write(0, address_buffer)
             send_buffer.write(address_buffer.length, tag_buffer)
 
-    //         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
+            serial.writeString("AT+CIPSEND=" + send_buffer.length + "\r\n")
 
-    //         let startTime: number = input.runningTime()
-    //         let returnedMessage : string = ""
+            let startTime: number = input.runningTime()
+            let returnedMessage : string = ""
     
-    //         while (true) {
-    //             returnedMessage += serial.readString()
-    //             if (returnedMessage.includes("OK")) {
-    //                 break
-    //             }
-    //             if (input.runningTime() - startTime > command_timeout) {
-    //                 basic.showString(returnedMessage)
-    //                 return false
-    //             }
-    //         }
+            while (true) {
+                returnedMessage += serial.readString()
+                if (returnedMessage.includes("OK")) {
+                    break
+                }
+                if (input.runningTime() - startTime > command_timeout) {
+                    basic.showString(returnedMessage)
+                    return false
+                }
+            }
     
-    //         while (true) {
-    //             returnedMessage += serial.readString()
-    //             if (returnedMessage.includes(">")) {
-    //                 break
-    //             }
-    //             if (input.runningTime() - startTime > command_timeout) {
-    //                 basic.showString(returnedMessage)
-    //                 return false
-    //             }
-    //         }
+            while (true) {
+                returnedMessage += serial.readString()
+                if (returnedMessage.includes(">")) {
+                    break
+                }
+                if (input.runningTime() - startTime > command_timeout) {
+                    basic.showString(returnedMessage)
+                    return false
+                }
+            }
     
-    //         serial.writeBuffer(testCommand);
+            serial.writeBuffer(send_buffer);
         }
     }
 
