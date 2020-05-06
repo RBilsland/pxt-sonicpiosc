@@ -276,8 +276,8 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let address_buffer_length = (Math.trunc(address.length / 4) + 1) * 4
 
-            // address_buffer = pins.createBuffer(address_buffer_length + 1)
-            // address_buffer.fill(0)
+            address_buffer = pins.createBuffer(address_buffer_length + 1)
+            address_buffer.fill(0)
 
             // let buffer_position: number = 0
 
