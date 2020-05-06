@@ -356,7 +356,7 @@ namespace SonicPiOSC {
 
         send_buffer.write(0, address_buffer)
         send_buffer.write(address_buffer.length, tag_buffer)
-        send_buffer.write(address_buffer.length + tag_buffer.length, parameter_buffer)
+        send_buffer.write(address_buffer.length + tag_buffer_length, parameter_buffer)
 
         serial.writeString("AT+CIPSEND=" + send_buffer.length + "\r\n")
 
