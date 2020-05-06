@@ -284,15 +284,8 @@ namespace SonicPiOSC {
                 address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, address.charCodeAt(buffer_position))
             }
 
-            // let buffer_position: number = 0
-
-            // for (const c of address) {
-            //     address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, c.charCodeAt())
-            //     buffer_position++
-            // }
-
-            // tag_buffer = pins.createBuffer(1)
-            // tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
+            tag_buffer = pins.createBuffer(1)
+            tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
         }
     }
 
