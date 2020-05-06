@@ -279,10 +279,10 @@ namespace SonicPiOSC {
             address_buffer = pins.createBuffer(address_buffer_length)
             address_buffer.fill(0)
 
-            for (var buffer_position = 0; buffer_position < address.length; buffer_position++)
-            {
-                address_buffer.setNumber(NumberFormat.Int8E, buffer_position, address.charCodeAt(buffer_position))
-            }
+            // for (var buffer_position = 0; buffer_position < address.length; buffer_position++)
+            // {
+            //     address_buffer.setNumber(NumberFormat.Int8E, buffer_position, address.charCodeAt(buffer_position))
+            // }
 
             // let buffer_position: number = 0
 
