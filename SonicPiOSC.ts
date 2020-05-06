@@ -296,27 +296,26 @@ namespace SonicPiOSC {
      * Add String Parameter
      */
     //% block="add string parameter|string = %value"
-    export function addStringParameter(string: value) {
+    export function addStringParameter(valie: string) {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
-            let wibble: string = "wibble"
-            // let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
+            let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
-            // new_tag_buffer.write(0, tag_buffer)
-            // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 73)
+            new_tag_buffer.write(0, tag_buffer)
+            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 73)
 
-            // tag_buffer = new_tag_buffer
+            tag_buffer = new_tag_buffer
 
-            // let parameter_value_length = (Math.trunc(value.length / 4) + 1) * 4
-            // let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
+            let parameter_value_length = (Math.trunc(value.length / 4) + 1) * 4
+            let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
 
-            // new_parameter_buffer.fill(0)
-            // new_parameter_buffer.write(0, parameter_buffer)
+            new_parameter_buffer.fill(0)
+            new_parameter_buffer.write(0, parameter_buffer)
 
-            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
-            // }
+            for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
+                new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
+            }
 
-            // parameter_buffer = new_parameter_buffer
+            parameter_buffer = new_parameter_buffer
         }
     }
 
