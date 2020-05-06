@@ -294,7 +294,7 @@ namespace SonicPiOSC {
     //% block="send command"
     export function sendCommand() {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
-            let tag_buffer_length = (Math.trunc((10 - 1) / 4) + 1) * 4
+            let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
 
     //         let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
     //         send_buffer.fill(0)
