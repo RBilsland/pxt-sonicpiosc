@@ -279,8 +279,7 @@ namespace SonicPiOSC {
             address_buffer = pins.createBuffer(address_buffer_length)
             address_buffer.fill(0)
 
-            for (let buffer_position = 0; buffer_position < address.length; buffer_position++)
-            {
+            for (let buffer_position = 0; buffer_position < address.length; buffer_position++) {
                 address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, address.charCodeAt(buffer_position))
             }
 
@@ -289,13 +288,13 @@ namespace SonicPiOSC {
         }
     }
 
-    // /**
-    //  * Send Command
-    //  */
-    // //% block="send command"
-    // export function sendCommand() {
-    //     if (initialised_state && wifi_connected_state && osc_connected_state) {
-    //         let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
+    /**
+     * Send Command
+     */
+    //% block="send command"
+    export function sendCommand() {
+        if (initialised_state && wifi_connected_state && osc_connected_state) {
+            let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
 
     //         let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
     //         send_buffer.fill(0)
@@ -331,10 +330,8 @@ namespace SonicPiOSC {
     //         }
     
     //         serial.writeBuffer(testCommand);
-    
-    //         return true
-    //     }
-    // }
+        }
+    }
 
     /**
     * Send Test Command
