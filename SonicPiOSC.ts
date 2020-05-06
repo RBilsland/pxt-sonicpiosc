@@ -298,7 +298,8 @@ namespace SonicPiOSC {
     //% block="add string parameter|string = %value"
     export function addStringParameter(string: value) {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
-            let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
+            let wibble: string = "wibble"
+            // let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             // new_tag_buffer.write(0, tag_buffer)
             // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 73)
@@ -318,6 +319,7 @@ namespace SonicPiOSC {
             // parameter_buffer = new_parameter_buffer
         }
     }
+
     /**
     * Return the Send Command State
     */
