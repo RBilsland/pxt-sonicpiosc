@@ -276,67 +276,67 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let address_buffer_length = (Math.trunc(address.length / 4) + 1) * 4
 
-            address_buffer = pins.createBuffer(address_buffer_length + 1)
-            address_buffer.fill(0)
+            // address_buffer = pins.createBuffer(address_buffer_length + 1)
+            // address_buffer.fill(0)
 
-            let buffer_position: number = 0
+            // let buffer_position: number = 0
 
-            for (const c of address) {
-                address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, c.charCodeAt())
-                buffer_position++
-            }
+            // for (const c of address) {
+            //     address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, c.charCodeAt())
+            //     buffer_position++
+            // }
 
-            tag_buffer = pins.createBuffer(1)
-            tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
+            // tag_buffer = pins.createBuffer(1)
+            // tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
         }
     }
 
-    /**
-     * Send Command
-     */
-    //% block="send command"
-    export function sendCommand() {
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
-            let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
+    // /**
+    //  * Send Command
+    //  */
+    // //% block="send command"
+    // export function sendCommand() {
+    //     if (initialised_state && wifi_connected_state && osc_connected_state) {
+    //         let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
 
-            let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
-            send_buffer.fill(0)
+    //         let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
+    //         send_buffer.fill(0)
 
-            send_buffer.write(0, address_buffer)
-            send_buffer.write(address_buffer.length, tag_buffer)
+    //         send_buffer.write(0, address_buffer)
+    //         send_buffer.write(address_buffer.length, tag_buffer)
 
-            serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
+    //         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
-            let startTime: number = input.runningTime()
-            let returnedMessage : string = ""
+    //         let startTime: number = input.runningTime()
+    //         let returnedMessage : string = ""
     
-            while (true) {
-                returnedMessage += serial.readString()
-                if (returnedMessage.includes("OK")) {
-                    break
-                }
-                if (input.runningTime() - startTime > command_timeout) {
-                    basic.showString(returnedMessage)
-                    return false
-                }
-            }
+    //         while (true) {
+    //             returnedMessage += serial.readString()
+    //             if (returnedMessage.includes("OK")) {
+    //                 break
+    //             }
+    //             if (input.runningTime() - startTime > command_timeout) {
+    //                 basic.showString(returnedMessage)
+    //                 return false
+    //             }
+    //         }
     
-            while (true) {
-                returnedMessage += serial.readString()
-                if (returnedMessage.includes(">")) {
-                    break
-                }
-                if (input.runningTime() - startTime > command_timeout) {
-                    basic.showString(returnedMessage)
-                    return false
-                }
-            }
+    //         while (true) {
+    //             returnedMessage += serial.readString()
+    //             if (returnedMessage.includes(">")) {
+    //                 break
+    //             }
+    //             if (input.runningTime() - startTime > command_timeout) {
+    //                 basic.showString(returnedMessage)
+    //                 return false
+    //             }
+    //         }
     
-            serial.writeBuffer(testCommand);
+    //         serial.writeBuffer(testCommand);
     
-            return true
-        }
-    }
+    //         return true
+    //     }
+    // }
 
     /**
     * Send Test Command
