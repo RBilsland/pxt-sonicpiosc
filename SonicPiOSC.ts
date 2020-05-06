@@ -296,11 +296,11 @@ namespace SonicPiOSC {
         if (initialised_state && wifi_connected_state && osc_connected_state) {
             let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
 
-    //         let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
-    //         send_buffer.fill(0)
+            let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
+            send_buffer.fill(0)
 
-    //         send_buffer.write(0, address_buffer)
-    //         send_buffer.write(address_buffer.length, tag_buffer)
+            send_buffer.write(0, address_buffer)
+            send_buffer.write(address_buffer.length, tag_buffer)
 
     //         serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
 
