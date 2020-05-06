@@ -6,6 +6,7 @@ namespace SonicPiOSC {
     let initialised_state: boolean = false
     let wifi_connected_state: boolean = false
     let osc_connected_state: boolean = false
+    let send_command_state: boolean = false
 
     let number_of_retries: number = 1
     let command_timeout: number = 10000
@@ -69,6 +70,7 @@ namespace SonicPiOSC {
         initialised_state = false
         wifi_connected_state = false
         osc_connected_state = false
+        send_command_state = false
 
         while (!initialised_state && retry_count < number_of_retries) {
             initialised_state = performInitialise(tx, rx, baudrate)
@@ -131,6 +133,7 @@ namespace SonicPiOSC {
     export function connectWiFi(ssid: string, password: string) {
         wifi_connected_state = false
         osc_connected_state = false
+        send_command_state = false
 
         if (initialised_state) {
             let retry_count = 0
@@ -212,6 +215,7 @@ namespace SonicPiOSC {
     //% port.defl=4560
     export function connectOSC(server: string, port: number) {
         osc_connected_state = false
+        send_command_state = false
 
         if (initialised_state && wifi_connected_state) {
             let retry_count = 0
@@ -289,48 +293,70 @@ namespace SonicPiOSC {
     }
 
     /**
+    * Return the Send Command State
+    */
+    //% block="send command state"
+    export function sendCommandState(): boolean {
+        return send_command_state
+    }
+
+    /**
      * Send Command
      */
     //% block="send command"
     export function sendCommand() {
+        send_command_state = false
+
         if (initialised_state && wifi_connected_state && osc_connected_state) {
-            let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
+            let retry_count = 0
 
-            let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
-            send_buffer.fill(0)
+            while (!send_command_state && retry_count < number_of_retries) {
+                send_command_state = performSendCommand()
 
-            send_buffer.write(0, address_buffer)
-            send_buffer.write(address_buffer.length, tag_buffer)
-
-            serial.writeString("AT+CIPSEND=" + send_buffer.length + "\r\n")
-
-            let startTime: number = input.runningTime()
-            let returnedMessage : string = ""
-    
-            while (true) {
-                returnedMessage += serial.readString()
-                if (returnedMessage.includes("OK")) {
-                    break
-                }
-                if (input.runningTime() - startTime > command_timeout) {
-                    basic.showString(returnedMessage)
-                    return false
-                }
+                retry_count++
             }
-    
-            while (true) {
-                returnedMessage += serial.readString()
-                if (returnedMessage.includes(">")) {
-                    break
-                }
-                if (input.runningTime() - startTime > command_timeout) {
-                    basic.showString(returnedMessage)
-                    return false
-                }
-            }
-    
-            serial.writeBuffer(send_buffer);
         }
+    }
+
+    export function performSendCommand(): boolean {
+        let tag_buffer_length = (Math.trunc((tag_buffer.length - 1) / 4) + 1) * 4
+
+        let send_buffer = pins.createBuffer(address_buffer.length + tag_buffer_length)
+        send_buffer.fill(0)
+
+        send_buffer.write(0, address_buffer)
+        send_buffer.write(address_buffer.length, tag_buffer)
+
+        serial.writeString("AT+CIPSEND=" + send_buffer.length + "\r\n")
+
+        let startTime: number = input.runningTime()
+        let returnedMessage : string = ""
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes("OK")) {
+                break
+            }
+            if (input.runningTime() - startTime > command_timeout) {
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        while (true) {
+            returnedMessage += serial.readString()
+            if (returnedMessage.includes(">")) {
+                break
+            }
+            if (input.runningTime() - startTime > command_timeout) {
+                basic.showString(returnedMessage)
+                return false
+            }
+        }
+
+        serial.writeBuffer(send_buffer)
+
+        return true
     }
 
     /**
