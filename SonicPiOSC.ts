@@ -342,7 +342,7 @@ namespace SonicPiOSC {
 
             let arr = new ArrayBuffer(4)
             let view = new DataView(arr)
-            view.setUint32(0, value, false)
+            // view.setUint32(0, value, false)
             
             // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
             //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, arr[buffer_position])
