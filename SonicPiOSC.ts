@@ -344,11 +344,11 @@ namespace SonicPiOSC {
             farr[0] = value
             var barr = new Int8Array(farr.buffer)
 
-            for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-                new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
-            }
+            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
+            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
+            // }
 
-            parameter_buffer = new_parameter_buffer
+            // parameter_buffer = new_parameter_buffer
         }
     }
 
