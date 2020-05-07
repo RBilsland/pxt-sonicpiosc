@@ -322,7 +322,7 @@ namespace SonicPiOSC {
     }
 
     /**
-     * Add String Parameter
+     * Add Int Parameter
      */
     //% block="add int parameter|value = %value"
     export function addIntParameter(value: number) {
@@ -334,21 +334,21 @@ namespace SonicPiOSC {
 
             tag_buffer = new_tag_buffer
 
-            let parameter_value_length = 4
-            let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
+            // let parameter_value_length = 4
+            // let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
 
-            new_parameter_buffer.fill(0)
-            new_parameter_buffer.write(0, parameter_buffer)
+            // new_parameter_buffer.fill(0)
+            // new_parameter_buffer.write(0, parameter_buffer)
 
-            let arr = new ArrayBuffer(4)
-            let view = new DataView(arr);
-            view.setUint32(0, value, false)
+            // let arr = new ArrayBuffer(4)
+            // let view = new DataView(arr);
+            // view.setUint32(0, value, false)
             
-            for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-                new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, arr[buffer_position])
-            }
+            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
+            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, arr[buffer_position])
+            // }
 
-            parameter_buffer = new_parameter_buffer
+            // parameter_buffer = new_parameter_buffer
         }
     }
 
