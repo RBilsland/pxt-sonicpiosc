@@ -334,11 +334,11 @@ namespace SonicPiOSC {
 
             tag_buffer = new_tag_buffer
 
-            // let parameter_value_length = 4
-            // let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
+            let parameter_value_length = 4
+            let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
 
-            // new_parameter_buffer.fill(0)
-            // new_parameter_buffer.write(0, parameter_buffer)
+            new_parameter_buffer.fill(0)
+            new_parameter_buffer.write(0, parameter_buffer)
 
             // let arr = new ArrayBuffer(4)
             // let view = new DataView(arr);
