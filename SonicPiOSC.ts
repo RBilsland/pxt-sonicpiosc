@@ -339,6 +339,7 @@ namespace SonicPiOSC {
 
             new_parameter_buffer.fill(0)
             new_parameter_buffer.write(0, parameter_buffer)
+            new_parameter_buffer.setNumber(NumberFormat.Int32BE, parameter_buffer.length, value)
 
             // let farr = new Float32Array(1)
             // farr[0] = value
@@ -348,7 +349,7 @@ namespace SonicPiOSC {
             //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
             // }
 
-            // parameter_buffer = new_parameter_buffer
+            parameter_buffer = new_parameter_buffer
         }
     }
 
