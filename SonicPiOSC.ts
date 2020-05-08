@@ -340,7 +340,7 @@ namespace SonicPiOSC {
             new_parameter_buffer.fill(0)
             new_parameter_buffer.write(0, parameter_buffer)
 
-            let farr = new Float32Array(1)
+            // let farr = new Float32Array(1)
             // farr[0] = value
             // var barr = new Int8Array(farr.buffer)
 
