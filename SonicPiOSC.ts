@@ -16,48 +16,6 @@ namespace SonicPiOSC {
     let parameter_buffer: Buffer
 
     /**
-    * Return the number of retries
-    */
-    //% block="number of retries"
-    export function numberOfRetries(): number {
-        return number_of_retries
-    }
-
-    /**
-     * Set the number of retries
-     */
-    //% block="set number of retries|= %number"
-    //% %number.defl=1
-    export function setNumberOfRetries(number: number) {
-        number_of_retries = number
-    }
-
-    /**
-    * Return the command timeout
-    */
-    //% block="command timeout (ms)"
-    export function commandTimeout(): number {
-        return command_timeout
-    }
-
-    /**
-     * Set the command timeout
-     */
-    //% block="set command timeout (ms)|= %number"
-    //% %number.defl=10000
-    export function setCommandTimeout(number: number) {
-        command_timeout = number
-    }
-
-    /**
-    * Return the Initialised State
-    */
-    //% block="initialised state"
-    export function initialisedState(): boolean {
-        return initialised_state
-    }
-
-    /**
      * Initialise the ESP8266
      */
     //% block="initialise|TX = %tx|RX = %rx|baud rate = %baudrate"
@@ -119,11 +77,11 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Return the WiFi Connected state
+    * Return the Initialised State
     */
-    //% block="wifi connected state"
-    export function wifiConnectedState(): boolean {
-        return wifi_connected_state
+    //% block="initialised state"
+    export function initialisedState(): boolean {
+        return initialised_state
     }
 
      /**
@@ -201,11 +159,11 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Return the OSC Connected State
+    * Return the WiFi Connected state
     */
-    //% block="osc connected state"
-    export function sonicPiOSCState(): boolean  {
-        return osc_connected_state
+    //% block="wifi connected state"
+    export function wifiConnectedState(): boolean {
+        return wifi_connected_state
     }
 
     /**
@@ -273,6 +231,14 @@ namespace SonicPiOSC {
     }
 
     /**
+    * Return the OSC Connected State
+    */
+    //% block="osc connected state"
+    export function sonicPiOSCState(): boolean  {
+        return osc_connected_state
+    }
+
+    /**
      * Start Command
      */
     //% block="start command|address = %address"
@@ -284,11 +250,13 @@ namespace SonicPiOSC {
             address_buffer.fill(0)
 
             for (let buffer_position = 0; buffer_position < address.length; buffer_position++) {
-                address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, address.charCodeAt(buffer_position))
+                address_buffer.setUint8(buffer_position, address.charCodeAt(buffer_position))
+                // address_buffer.setNumber(NumberFormat.Int8LE, buffer_position, address.charCodeAt(buffer_position))
             }
 
             tag_buffer = pins.createBuffer(1)
-            tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
+            tag_buffer.setUint8(0, 44)
+            // tag_buffer.setNumber(NumberFormat.Int8LE, 0, 44)
 
             parameter_buffer = pins.createBuffer(0)
         }
@@ -303,7 +271,8 @@ namespace SonicPiOSC {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
-            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 115)
+            // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 115)
+            new_tag_buffer.setUint8(new_tag_buffer.length - 1, 115)
 
             tag_buffer = new_tag_buffer
 
@@ -314,7 +283,8 @@ namespace SonicPiOSC {
             new_parameter_buffer.write(0, parameter_buffer)
 
             for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-                new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
+                // new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
+                new_parameter_buffer.setUint8(parameter_buffer.length + buffer_position, value.charCodeAt(buffer_position))
             }
 
             parameter_buffer = new_parameter_buffer
@@ -330,7 +300,8 @@ namespace SonicPiOSC {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
-            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 105)
+            // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 105)
+            new_tag_buffer.setUint8(new_tag_buffer.length - 1, 105)
 
             tag_buffer = new_tag_buffer
 
@@ -340,14 +311,6 @@ namespace SonicPiOSC {
             new_parameter_buffer.fill(0)
             new_parameter_buffer.write(0, parameter_buffer)
             new_parameter_buffer.setNumber(NumberFormat.Int32BE, parameter_buffer.length, value)
-
-            // let farr = new Float32Array(1)
-            // farr[0] = value
-            // var barr = new Int8Array(farr.buffer)
-
-            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
-            // }
 
             parameter_buffer = new_parameter_buffer
         }
@@ -362,7 +325,8 @@ namespace SonicPiOSC {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
-            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 102)
+            // new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 102)
+            new_tag_buffer.setUint8(new_tag_buffer.length - 1, 102)
 
             tag_buffer = new_tag_buffer
 
@@ -372,14 +336,6 @@ namespace SonicPiOSC {
             new_parameter_buffer.fill(0)
             new_parameter_buffer.write(0, parameter_buffer)
             new_parameter_buffer.setNumber(NumberFormat.Float32BE, parameter_buffer.length, value)
-
-            // let farr = new Float32Array(1)
-            // farr[0] = value
-            // var barr = new Int8Array(farr.buffer)
-
-            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
-            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
-            // }
 
             parameter_buffer = new_parameter_buffer
         }
@@ -455,128 +411,40 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Send Test Command
+    * Return the number of retries
     */
-    //% block="send test command"
-    export function sendTestCommand(): boolean {
-        if (!osc_connected_state) {
-             return false
-        }
-
-        // let testCommand: Array<number> = [0x2f, 0x6f, 0x73, 0x63, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x2f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x73, 0x69, 0x73, 0x00, 0x00, 0x00, 0x00, 0x31, 0x39, 0x32, 0x2e, 0x31, 0x36, 0x38, 0x2e, 0x31, 0x2e, 0x32, 0x34, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0xd0, 0x4f, 0x4b, 0x00, 0x00]
-        // let testCommand: string = "\x2f\x6f\x73\x63\x43\x6f\x6e\x74\x72\x6f\x6c\x2f\x73\x74\x61\x72\x74\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x2f\x00\x00\x00\x00\x2c\x73\x69\x73\x00\x00\x00\x00\x31\x39\x32\x2e\x31\x36\x38\x2e\x31\x2e\x32\x34\x36\x00\x00\x00\x00\x00\x11\xd0\x4f\x4b\x00\x00"
-        // let testCommand: string = "TestCommand"
-        let testCommand = pins.createBuffer(64);
-        testCommand.setNumber(NumberFormat.Int8LE, 0, 0x2F)
-        testCommand.setNumber(NumberFormat.Int8LE, 1, 0x6F)
-        testCommand.setNumber(NumberFormat.Int8LE, 2, 0x73)
-        testCommand.setNumber(NumberFormat.Int8LE, 3, 0x63)
-        testCommand.setNumber(NumberFormat.Int8LE, 4, 0x43)
-        testCommand.setNumber(NumberFormat.Int8LE, 5, 0x6f)
-        testCommand.setNumber(NumberFormat.Int8LE, 6, 0x6e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 7, 0x74)
-        testCommand.setNumber(NumberFormat.Int8LE, 8, 0x72)
-        testCommand.setNumber(NumberFormat.Int8LE, 9, 0x6f)
-        testCommand.setNumber(NumberFormat.Int8LE, 10, 0x6c)
-        testCommand.setNumber(NumberFormat.Int8LE, 11, 0x2f) 
-        testCommand.setNumber(NumberFormat.Int8LE, 12, 0x73) 
-        testCommand.setNumber(NumberFormat.Int8LE, 13, 0x74) 
-        testCommand.setNumber(NumberFormat.Int8LE, 14, 0x61) 
-        testCommand.setNumber(NumberFormat.Int8LE, 15, 0x72) 
-        testCommand.setNumber(NumberFormat.Int8LE, 16, 0x74) 
-        testCommand.setNumber(NumberFormat.Int8LE, 17, 0x43) 
-        testCommand.setNumber(NumberFormat.Int8LE, 18, 0x6f) 
-        testCommand.setNumber(NumberFormat.Int8LE, 19, 0x6e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 20, 0x6e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 21, 0x65) 
-        testCommand.setNumber(NumberFormat.Int8LE, 22, 0x63) 
-        testCommand.setNumber(NumberFormat.Int8LE, 23, 0x74) 
-        testCommand.setNumber(NumberFormat.Int8LE, 24, 0x69) 
-        testCommand.setNumber(NumberFormat.Int8LE, 25, 0x6f) 
-        testCommand.setNumber(NumberFormat.Int8LE, 26, 0x6e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 27, 0x2f) 
-        testCommand.setNumber(NumberFormat.Int8LE, 28, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 29, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 30, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 31, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 32, 0x2c) 
-        testCommand.setNumber(NumberFormat.Int8LE, 33, 0x73) 
-        testCommand.setNumber(NumberFormat.Int8LE, 34, 0x69) 
-        testCommand.setNumber(NumberFormat.Int8LE, 35, 0x73) 
-        testCommand.setNumber(NumberFormat.Int8LE, 36, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 37, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 38, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 39, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 40, 0x31) 
-        testCommand.setNumber(NumberFormat.Int8LE, 41, 0x39) 
-        testCommand.setNumber(NumberFormat.Int8LE, 42, 0x32) 
-        testCommand.setNumber(NumberFormat.Int8LE, 43, 0x2e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 44, 0x31) 
-        testCommand.setNumber(NumberFormat.Int8LE, 45, 0x36) 
-        testCommand.setNumber(NumberFormat.Int8LE, 46, 0x38) 
-        testCommand.setNumber(NumberFormat.Int8LE, 47, 0x2e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 48, 0x31) 
-        testCommand.setNumber(NumberFormat.Int8LE, 49, 0x2e) 
-        testCommand.setNumber(NumberFormat.Int8LE, 50, 0x32) 
-        testCommand.setNumber(NumberFormat.Int8LE, 51, 0x34) 
-        testCommand.setNumber(NumberFormat.Int8LE, 52, 0x36) 
-        testCommand.setNumber(NumberFormat.Int8LE, 53, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 54, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 55, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 56, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 57, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 58, 0x11) 
-        testCommand.setNumber(NumberFormat.Int8LE, 59, 0xd0) 
-        testCommand.setNumber(NumberFormat.Int8LE, 60, 0x4f) 
-        testCommand.setNumber(NumberFormat.Int8LE, 61, 0x4b) 
-        testCommand.setNumber(NumberFormat.Int8LE, 62, 0x00) 
-        testCommand.setNumber(NumberFormat.Int8LE, 63, 0x00)
-
-        serial.writeString("AT+CIPSEND=" + testCommand.length + "\r\n")
-
-        let startTime: number = input.runningTime()
-        let returnedMessage : string = ""
-
-        while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes("OK")) {
-                break
-            }
-            if (input.runningTime() - startTime > command_timeout) {
-                basic.showString(returnedMessage)
-                return false
-            }
-        }
-
-        while (true) {
-            returnedMessage += serial.readString()
-            if (returnedMessage.includes(">")) {
-                break
-            }
-            if (input.runningTime() - startTime > command_timeout) {
-                basic.showString(returnedMessage)
-                return false
-            }
-        }
-
-        // serial.writeString(testCommand)
-        // serial.writeNumbers(testCommand)
-        serial.writeBuffer(testCommand);
-
-        // while (true) {
-        //     returnedMessage += serial.readString()
-        //     if (input.runningTime() - startTime > maximumCommandTimeout) {
-        //         basic.showString(returnedMessage)
-        //         return false
-        //     }
-        // }
-
-        return true
+    //% block="number of retries"
+    //% advanced=true
+    export function numberOfRetries(): number {
+        return number_of_retries
     }
 
-    // function dumpString(message: string) {
-    //     for (let i = 0; i < message.length; i++) {
-    //         basic.showNumber(message.charCodeAt(i));
-    //     }
-    // }
+    /**
+     * Set the number of retries
+     */
+    //% block="set number of retries|= %number"
+    //% %number.defl=1
+    //% advanced=true
+    export function setNumberOfRetries(number: number) {
+        number_of_retries = number
+    }
+
+    /**
+    * Return the command timeout
+    */
+    //% block="command timeout (ms)"
+    //% advanced=true
+    export function commandTimeout(): number {
+        return command_timeout
+    }
+
+    /**
+     * Set the command timeout
+     */
+    //% block="set command timeout (ms)|= %number"
+    //% %number.defl=10000
+    //% advanced=true
+    export function setCommandTimeout(number: number) {
+        command_timeout = number
+    }
 }
