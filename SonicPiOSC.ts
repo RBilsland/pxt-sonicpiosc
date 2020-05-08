@@ -354,6 +354,38 @@ namespace SonicPiOSC {
     }
 
     /**
+     * Add Float Parameter
+     */
+    //% block="add float parameter|value = %value"
+    export function addFloatParameter(value: number) {
+        if (initialised_state && wifi_connected_state && osc_connected_state) {
+            let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
+
+            new_tag_buffer.write(0, tag_buffer)
+            new_tag_buffer.setNumber(NumberFormat.Int8LE, new_tag_buffer.length - 1, 102)
+
+            tag_buffer = new_tag_buffer
+
+            let parameter_value_length = 4
+            let new_parameter_buffer = pins.createBuffer(parameter_buffer.length + parameter_value_length)
+
+            new_parameter_buffer.fill(0)
+            new_parameter_buffer.write(0, parameter_buffer)
+            new_parameter_buffer.setNumber(NumberFormat.Float32BE, parameter_buffer.length, value)
+
+            // let farr = new Float32Array(1)
+            // farr[0] = value
+            // var barr = new Int8Array(farr.buffer)
+
+            // for (let buffer_position = 0; buffer_position < parameter_value_length; buffer_position++) {
+            //     new_parameter_buffer.setNumber(NumberFormat.Int8LE, parameter_buffer.length + buffer_position, barr[buffer_position])
+            // }
+
+            parameter_buffer = new_parameter_buffer
+        }
+    }
+
+    /**
     * Return the Send Command State
     */
     //% block="send command state"
