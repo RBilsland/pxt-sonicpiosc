@@ -342,14 +342,6 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Return the Send Command State
-    */
-    //% block="send command state"
-    export function sendCommandState(): boolean {
-        return send_command_state
-    }
-
-    /**
      * Send Command
      */
     //% block="send command"
@@ -408,6 +400,14 @@ namespace SonicPiOSC {
         serial.writeBuffer(send_buffer)
 
         return true
+    }
+
+    /**
+    * Return the Send Command State
+    */
+    //% block="send command state"
+    export function sendCommandState(): boolean {
+        return send_command_state
     }
 
     /**
