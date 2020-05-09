@@ -16,13 +16,16 @@ The code is split into 4 parts, one for each micro:bit. The first is the code fo
 ![Sonic Pi gateway demo code for the micro:bit](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/sonicPiGatewayDemoMicrobit.png)
 The above code can also be found here https://makecode.microbit.org/_FDKFT97Vg4XV. You can then edit it to insert your own details and download the hex file.
 
+
 The next code is for the kick drum and it sends messages to the gateway.
 ![Kick drum demo code for the micro:bit](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/kickDrumDemoMicrobit.png)
 The above code can also be found here https://makecode.microbit.org/_aLKhcbh7Y1FJ. You can download the hex file.
 
+
 The next code is for the snare drum and it sends messages to the gateway.
 ![Snare drum demo code for the micro:bit](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/snareDrumDemoMicrobit.png)
 The above code can also be found here https://makecode.microbit.org/_bseLchJyb1p6. You can download the hex file.
+
 
 The next code is for the cymbal and it sends messages to the gateway.
 ![Cymbal demo code for the micro:bit](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/cymbalDemoMicrobit.png)
