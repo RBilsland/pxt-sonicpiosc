@@ -27,10 +27,12 @@ If using the iot:bit module then the defaut parameters will surffice. Once compl
 
 ### Connecting to WiFi
 
-You will need to provide the details of the WiFi access point you wish to connect to. Make sure you enter upper / lower case characters correctly as this will make a difference. You cannot attempt a WiFi connection unless you have successfully initialised a connection first. Once complete you can check if it was successfull or not.
+You will need to provide the details of the WiFi access point you wish to connect to. Make sure you enter upper / lower case characters correctly as this will make a difference. You cannot attempt a WiFi connection unless you have successfully initialised a connection first. Once complete you can check if it was successful or not.
 
 ![wifi block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/connectWiFi.png)
 
 ### Connecting to Sonic Pi
 
-You will need to provide the details of the IP Address of the machine where Sonic Pi is running and the 
+You will need to provide the details of the IP Address of the machine where Sonic Pi is running and the port the service is running on. Both of these pieces of information can be found in the IO preferences of Sonic Pi. Also make sure both the Enable OSC server and Send/Receive remote OSC checkboxes are ticked. You cannot attampt a Sonic Pi connection unless you have successfully connected WiFi first. Once complete you can check if it was successful or not.
+
+![sonic pi block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/connectSonicPi.png)
