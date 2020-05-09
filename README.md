@@ -2,7 +2,7 @@
 
 This extension has been developed to allow a micro:bit to send OpenSound Control (OSC) messages directly to an instance of Sonic Pi.
 
-The extension is built around the [ESP8266](https://en.wikipedia.org/wiki/ESP8266) low cost serial Wi-Fi microchip built into [Elecfreaks](https://www.elecfreaks.com/store/) iot:bit module, purchased this from [Cool Components](https://coolcomponents.co.uk/products/iot-bit-for-bbc-micro-bit) in the UK.
+The extension is built around the [ESP8266](https://en.wikipedia.org/wiki/ESP8266) low cost serial Wi-Fi microchip built into [Elecfreaks](https://www.elecfreaks.com/store/) iot:bit module, although any ESP8266 micro:bit module should work but may require different pins to be selected in the initialise block. The module was purchased from [Cool Components](https://coolcomponents.co.uk/products/iot-bit-for-bbc-micro-bit) in the UK.
 
 ![iot:bit module for the micro:bit by Elecfreaks](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/iotbit.png)
 
