@@ -13,7 +13,7 @@ A theremin is usually control by the distance of the performers hands from the d
 ## micro:bit Code
 
 ![theremin demo code for the micro:bit](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/thereminDemoMicrobit.png)
-The above code can also be found here. You can then edit it to insert your own details and download the hex file.
+The above code can also be found here https://makecode.microbit.org/_bfs8kdgWcWug. You can then edit it to insert your own details and download the hex file.
 
 
 ## Sonic Pi Code
