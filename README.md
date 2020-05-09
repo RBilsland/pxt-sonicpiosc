@@ -19,6 +19,12 @@ I've written a couple of demos (including videos) using this extension, a Therem
 * Theremin Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/ThereminDemo.md
 * Virtual Drum Kit Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/VirtualDrumKitDemo.md
 
+
+## What Next?
+
+I'm not sure, I have a few crazy ideas but nothing concrete yet, time to connect more things to a micro:bit I think. I'd love to see what you create too.
+
+
 ## Using the Extension
 
 For this I will use the micro:bits Microsoft MakeCode block editor.
