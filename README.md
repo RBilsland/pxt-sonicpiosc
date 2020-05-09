@@ -6,6 +6,7 @@ The extension is built around the ESP8266 low cost serial Wi-Fi microchip built 
 
 ![iot:bit module for the micro:bit by Elecfreaks](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/iotbit.png)
 
+
 ## Using the Extension
 
 For this I will use the micro:bits Microsoft MakeCode block editor.
@@ -14,6 +15,7 @@ For this I will use the micro:bits Microsoft MakeCode block editor.
 2. As this extension isn't included by default it will need to be added to the project. From the bottom of pallet of block categories click the Advanced section to expand it and then from the bottom of the Advanced section click Extensions.
 3. The extension isn't currently included in the extensions library so enter https://github.com/rBilsland/pxt-sonicpiosc in the search box at the top of the page and press return.
 4. Click the extension presented to add it to the project.
+
 
 ## Connecting to Sonic Pi
 
@@ -43,6 +45,7 @@ This establishes a connection to Sonic Pi as the micro:bit starts. The additiona
 
 ![initialise example block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/initialiseExample.png)
 
+
 ## Sending OpenSound Control (OSC) Messages
 
 Once a connection to Sonic Pi has been created messages can be sent.
@@ -58,3 +61,28 @@ This process is broken down into 3 steps, starting a command with it's associate
 When the A button is pressed a message will be built and sent with the address of "microbit" and will include 3 parameters, the first a "hello" string, next an integer of 123 and finally a float of 456.789.
 
 ![message example block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/messageExample.png)
+
+
+## Additional Blocks
+
+There are a couple of additional behind the scenes parameters that can be adjusted. They are to do with the number of retries that are automaticaly attempted and the timeout duration (in milliseconds) when communicating with the ESP8266. By default the number of retries is set to 1 (so no retries, it just tries once) and timeout duration is set to 10000ms (or 10 seconds).
+
+![additional block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/additional.png)
+
+
+## License
+
+MIT
+
+
+## Supported targets
+
+* for PXT/microbit
+(The metadata above is needed for package search.)
+
+```package
+sonicpiosc=github:RBilsland/pxt-sonicpiosc
+```
+
+
+
