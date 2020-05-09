@@ -39,5 +39,11 @@ end
 4. Download the hex code to your micro:bit.
 5. Insert the micro:bit into the iot:bit and power up.
 6. The micro:bit show display a row of dots, one by one, across the top of its screen. If any of these dot move down a row then this indicates an issue establishing a connection, power off and back on the iot:bit and try again (this is an extreme edge case mostly caused by entering invalid details, double check them including it the case of WiFi name and password).
-7. To start the micro:bit Theremin press button A and to stop press button B. While it is running a dot will be shown in the middle of the bottom row.
-8. When running in Sonic Pi a stream of cues will be shown with changing note and amp values.  
+7. Run the Sonic Pi code.
+8. To start the micro:bit Theremin press button A and to stop press button B. While it is running a dot will be shown in the middle of the bottom row.
+9. When running in Sonic Pi a stream of cues will be shown with changing note and amp values.
+
+
+## Demo Video
+
+A video of the demo can be seen here ?

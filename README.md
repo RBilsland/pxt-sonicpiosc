@@ -12,6 +12,13 @@ The extension is built around the [ESP8266](https://en.wikipedia.org/wiki/ESP826
 Why build this extension? Well Sonic Pi is a fantastic musical tool and micro:bits allow so many ways of interacting with them so getting them to talk to each other opens up a whole new world of possibilities. Music is something that should be able to be physically interacted with and the micro:bits provide so many ways of interacting with them either by themselves or through things being plugged into them. It's all about encouraging creativity and collaboration between people with different ideas and skill sets.
 
 
+## Demos
+
+I've written a couple of demos (including videos) using this extension, a Theremin demo where the pitch and roll of a micro:bit control the note and volumed played and a virtual drumkit where a micro:bit on each hand and one on a foot control the playing of a snare drum, kick drum and cymbal.
+
+* Theremin Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/ThereminDemo.md
+* Virtual Drumkit Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/VirtualDrumkitDemo.md
+
 ## Using the Extension
 
 For this I will use the micro:bits Microsoft MakeCode block editor.
