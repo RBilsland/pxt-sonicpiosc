@@ -36,3 +36,9 @@ You will need to provide the details of the WiFi access point you wish to connec
 You will need to provide the details of the IP Address of the machine where Sonic Pi is running and the port the service is running on. Both of these pieces of information can be found in the IO preferences of Sonic Pi. Also make sure both the Enable OSC server and Send/Receive remote OSC checkboxes are ticked. You cannot attampt a Sonic Pi connection unless you have successfully connected WiFi first. Once complete you can check if it was successful or not.
 
 ![sonic pi block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/connectSonicPi.png)
+
+### Example of use
+
+This establishes a connection to Sonic Pi as the micro:bit starts. The additional 500ms delay is to allow the ESP8266 microchip to start. After each step status is checked before proceeding.
+
+![initialise example block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/initialiseExample.png)
