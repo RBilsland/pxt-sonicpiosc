@@ -1,5 +1,6 @@
 /**
- * 
+ * Sonic Pi OSC Extension for the micro:bit to allow a micro:bit to send 
+ * OpenSound Control (OSC) messages directly to an instance of Sonic Pi.
  */
 
 /**
@@ -385,7 +386,6 @@ namespace SonicPiOSC {
                 break
             }
             if (input.runningTime() - startTime > command_timeout) {
-                basic.showString(returnedMessage)
                 return false
             }
         }
@@ -396,7 +396,6 @@ namespace SonicPiOSC {
                 break
             }
             if (input.runningTime() - startTime > command_timeout) {
-                basic.showString(returnedMessage)
                 return false
             }
         }
