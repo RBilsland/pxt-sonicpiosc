@@ -7,12 +7,17 @@ The extension is built around the [ESP8266](https://en.wikipedia.org/wiki/ESP826
 ![iot:bit module for the micro:bit by Elecfreaks](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/iotbit.png)
 
 
+## Why?
+
+Why build this extension? Well Sonic Pi is a fantastic musical tool and micro:bits allow so many ways of interacting with them so getting them to talk to each other opens up a whole new world of possibilities. Music is something that should be able to be physically interacted with and the micro:bits provide so many ways of interacting with them either by themselves or through things being plugged into them. It's all about encouraging creativity and collaboration between people with different ideas and skill sets.
+
+
 ## Using the Extension
 
 For this I will use the micro:bits Microsoft MakeCode block editor.
 
 1. Open the Microsoft MakeCode editor and create a new empty project.
-2. As this extension isn't included by default it will need to be added to the project. From the bottom of pallet of block categories click the Advanced section to expand it and then from the bottom of the Advanced section click Extensions.
+2. As this extension isn't included by default it will need to be added to the project. From the bottom of the palette of block categories click the Advanced section to expand it and then from the bottom of the Advanced section click Extensions.
 3. The extension isn't currently included in the extensions library so enter https://github.com/rBilsland/pxt-sonicpiosc in the search box at the top of the page and press return.
 4. Click the extension presented to add it to the project.
 
@@ -23,7 +28,7 @@ Before any messages can be sent to Sonic Pi a connection must first be establish
 
 ### Initialising the connection to the ESP8266 microchip
 
-If using the iot:bit module then the defaut parameters will surffice. Once complete you can check if it was successful or not.
+If using the iot:bit module then the default parameters will suffice. Once complete you can check if it was successful or not.
 
 ![initialise block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/initialise.png)
 
@@ -35,7 +40,7 @@ You will need to provide the details of the WiFi access point you wish to connec
 
 ### Connecting to Sonic Pi
 
-You will need to provide the details of the IP Address of the machine where Sonic Pi is running and the port the service is running on. Both of these pieces of information can be found in the IO preferences of Sonic Pi. Also make sure both the Enable OSC server and Send/Receive remote OSC checkboxes are ticked. You cannot attampt a Sonic Pi connection unless you have successfully connected WiFi first. Once complete you can check if it was successful or not.
+You will need to provide the details of the IP Address of the machine where Sonic Pi is running and the port the service is running on. Both of these pieces of information can be found in the IO preferences of Sonic Pi. Also make sure both the Enable OSC server and Send/Receive remote OSC checkboxes are ticked. You cannot attempt a Sonic Pi connection unless you have successfully connected WiFi first. Once complete you can check if it was successful or not.
 
 ![sonic pi block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/connectSonicPi.png)
 
@@ -52,7 +57,7 @@ Once a connection to Sonic Pi has been created messages can be sent.
 
 ### Building a Message
 
-This process is broken down into 3 steps, starting a command with it's associated address, adding parameters (if any are required) and finally sending the message. The address is what in Sonic Pi can be sync'd to and strings, integers and float can be passed as parameters. Once the message has been sent you can check if it was successful or not.
+This process is broken down into 3 steps, starting a command with its associated address, adding parameters (if any are required) and finally sending the message. The address is what in Sonic Pi can be synced to and strings, integers and float can be passed as parameters. Once the message has been sent you can check if it was successful or not.
 
 ![message block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/message.png)
 
@@ -65,7 +70,7 @@ When the A button is pressed a message will be built and sent with the address o
 
 ## Additional Blocks
 
-There are a couple of additional behind the scenes parameters that can be adjusted. They are to do with the number of retries that are automaticaly attempted and the timeout duration (in milliseconds) when communicating with the ESP8266. By default the number of retries is set to 1 (so no retries, it just tries once) and timeout duration is set to 10000ms (or 10 seconds).
+There are a couple of additional behind the scenes parameters that can be adjusted. They are to do with the number of retries that are automatically attempted and the timeout duration (in milliseconds) when communicating with the ESP8266. By default the number of retries is set to 1 (so no retries, it just tries once) and timeout duration is set to 10000ms (or 10 seconds).
 
 ![additional block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/additional.png)
 
