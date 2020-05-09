@@ -9,7 +9,7 @@
 namespace SonicPiOSC {
     let initialised_state: boolean = false
     let wifi_connected_state: boolean = false
-    let osc_connected_state: boolean = false
+    let sonicpi_connected_state: boolean = false
     let send_command_state: boolean = false
 
     let number_of_retries: number = 1
@@ -31,7 +31,7 @@ namespace SonicPiOSC {
 
         initialised_state = false
         wifi_connected_state = false
-        osc_connected_state = false
+        sonicpi_connected_state = false
         send_command_state = false
 
         while (!initialised_state && retry_count < number_of_retries) {
@@ -94,7 +94,7 @@ namespace SonicPiOSC {
     //% block="connect WiFi|name = %ssid|password = %password"
     export function connectWiFi(ssid: string, password: string) {
         wifi_connected_state = false
-        osc_connected_state = false
+        sonicpi_connected_state = false
         send_command_state = false
 
         if (initialised_state) {
@@ -173,24 +173,24 @@ namespace SonicPiOSC {
     /**
      * Connect to OSC
      */
-    //% block="connect osc|server = %server|port = %port"
+    //% block="connect Sonic Pi|server = %server|port = %port"
     //% port.defl=4560
-    export function connectOSC(server: string, port: number) {
-        osc_connected_state = false
+    export function connectSonicPi(server: string, port: number) {
+        sonicpi_connected_state = false
         send_command_state = false
 
         if (initialised_state && wifi_connected_state) {
             let retry_count = 0
 
-            while (!osc_connected_state && retry_count < number_of_retries) {
-                osc_connected_state = performConnectOSC(server, port)
+            while (!sonicpi_connected_state && retry_count < number_of_retries) {
+                sonicpi_connected_state = performConnectSonicPi(server, port)
 
                 retry_count++
             }
         }
     }
 
-    function performConnectOSC(server: string, port: number): boolean {
+    function performConnectSonicPi(server: string, port: number): boolean {
         serial.writeString("AT+CIPMUX=0\r\n")
 
         let startTime: number = input.runningTime()
@@ -235,11 +235,11 @@ namespace SonicPiOSC {
     }
 
     /**
-    * Return the OSC Connected State
+    * Return the Sonic Pi Connected State
     */
-    //% block="osc connected state"
+    //% block="sonic pi connected state"
     export function sonicPiOSCState(): boolean  {
-        return osc_connected_state
+        return sonicpi_connected_state
     }
 
     /**
@@ -247,7 +247,7 @@ namespace SonicPiOSC {
      */
     //% block="start command|address = %address"
     export function startCommand(address: string) {
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
+        if (initialised_state && wifi_connected_state && sonicpi_connected_state) {
             let address_buffer_length = (Math.trunc(address.length / 4) + 1) * 4
 
             address_buffer = pins.createBuffer(address_buffer_length)
@@ -271,7 +271,7 @@ namespace SonicPiOSC {
      */
     //% block="add string parameter|value = %value"
     export function addStringParameter(value: string) {
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
+        if (initialised_state && wifi_connected_state && sonicpi_connected_state) {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
@@ -300,7 +300,7 @@ namespace SonicPiOSC {
      */
     //% block="add int parameter|value = %value"
     export function addIntParameter(value: number) {
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
+        if (initialised_state && wifi_connected_state && sonicpi_connected_state) {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
@@ -325,7 +325,7 @@ namespace SonicPiOSC {
      */
     //% block="add float parameter|value = %value"
     export function addFloatParameter(value: number) {
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
+        if (initialised_state && wifi_connected_state && sonicpi_connected_state) {
             let new_tag_buffer = pins.createBuffer(tag_buffer.length + 1)
 
             new_tag_buffer.write(0, tag_buffer)
@@ -352,7 +352,7 @@ namespace SonicPiOSC {
     export function sendCommand() {
         send_command_state = false
 
-        if (initialised_state && wifi_connected_state && osc_connected_state) {
+        if (initialised_state && wifi_connected_state && sonicpi_connected_state) {
             let retry_count = 0
 
             while (!send_command_state && retry_count < number_of_retries) {
