@@ -1,4 +1,4 @@
-# Sonic Pi OSC Extension for MicroBit
+# Sonic Pi OSC Extension for the micro:bit
 
 This extension has been developed to allow a micro:bit to send OpenSound Control (OSC) messages directly to an instance of Sonic Pi.
 
@@ -6,7 +6,7 @@ The extension is built around the ESP8266 low cost serial Wi-Fi microchip built 
 
 ![iot:bit module for the micro:bit by Elecfreaks](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/iotbit.png)
 
-## Basic Usage
+## Using the Extension
 
 For this I will use the micro:bits Microsoft MakeCode block editor.
 
@@ -42,3 +42,19 @@ You will need to provide the details of the IP Address of the machine where Soni
 This establishes a connection to Sonic Pi as the micro:bit starts. The additional 500ms delay is to allow the ESP8266 microchip to start. After each step status is checked before proceeding.
 
 ![initialise example block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/initialiseExample.png)
+
+## Sending OpenSound Control (OSC) Messages
+
+Once a connection to Sonic Pi has been created messages can be sent.
+
+### Building a Message
+
+This process is broken down into 3 steps, starting a command with it's associated address, adding parameters (if any are required) and finally sending the message. The address is what in Sonic Pi can be sync'd to and strings, integers and float can be passed as parameters. Once the message has been sent you can check if it was successful or not.
+
+![message block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/message.png)
+
+### Example of use
+
+When the A button is pressed a message will be built and sent with the address of "microbit" and will include 3 parameters, the first a "hello" string, next an integer of 123 and finally a float of 456.789.
+
+![message example block commands](https://github.com/RBilsland/pxt-sonicpiosc/blob/master/images/messageExample.png)
