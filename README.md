@@ -14,10 +14,10 @@ Why build this extension? Well Sonic Pi is a fantastic musical tool and micro:bi
 
 ## Demos
 
-I've written a couple of demos (including videos) using this extension, a Theremin demo where the pitch and roll of a micro:bit control the note and volumed played and a virtual drumkit where a micro:bit on each hand and one on a foot control the playing of a snare drum, kick drum and cymbal.
+I've written a couple of demos (including videos) using this extension, a Theremin demo where the pitch and roll of a micro:bit control the note and volumed played and a virtual drum kit where a micro:bit on each hand and one on a foot control the playing of a snare drum, kick drum and cymbal.
 
 * Theremin Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/ThereminDemo.md
-* Virtual Drumkit Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/VirtualDrumkitDemo.md
+* Virtual Drum Kit Demo - https://github.com/RBilsland/pxt-sonicpiosc/blob/master/VirtualDrumKitDemo.md
 
 ## Using the Extension
 

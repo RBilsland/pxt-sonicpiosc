@@ -1,6 +1,6 @@
 # Virtual Drumkit Demo
 
-Drumkits are usually controlled by drumsticks and the perfromers feat, in this demo there are no drumsticks or drums either, everythings virtual. By using the accelerometers in three micro:bits when they sense they are being stopped and send a radio message to a forth micro:bit that passes the message onto Sonic Pi to play the appropriate sound sample.
+Drum Kits are usually controlled by drumsticks and the performers feet, in this demo there are no drumsticks or drums either, everythings virtual. By using the accelerometers in three micro:bits when they sense they are being stopped and send a radio message to a forth micro:bit that passes the message onto Sonic Pi to play the appropriate sound sample.
 
 
 ## Hardware Requirements
@@ -71,13 +71,15 @@ end
 
 1. Start Sonic Pi and check the IO Preferences, noting down your Local IP address and Incoming OSC port.
 2. Copy in the code.
-3. Edit the micro:bit code updating your WiFi and Sonic Pi details.
+3. Edit the gateway micro:bit code updating your WiFi and Sonic Pi details.
 4. Download the hex code to your micro:bit.
 5. Insert the micro:bit into the iot:bit and power up.
-6. The micro:bit show display a row of dots, one by one, across the top of its screen. If any of these dot move down a row then this indicates an issue establishing a connection, power off and back on the iot:bit and try again (this is an extreme edge case mostly caused by entering invalid details, double check them including it the case of WiFi name and password).
-7. Run the Sonic Pi code.
-8. To start the micro:bit Theremin press button A and to stop press button B. While it is running a dot will be shown in the middle of the bottom row.
-9. When running in Sonic Pi a stream of cues will be shown with changing note and amp values.
+6. The micro:bit will display a row of dots, one by one, across the top of its screen. If any of these dots move down a row then this indicates an issue establishing a connection, power off and back on the iot:bit and try again (this is an extreme edge case mostly caused by entering invalid details, double check them including it the case of WiFi name and password).
+7. Download the hex code for the kick drum, snare drum and cymbal to your micro:bits.
+8. Power up these micro:bits.
+9. Run the Sonic Pi code.
+10. Attach the three micro:bits to your hands and foot and play your virtual drum kit. Everytime one of these micro:bits sends a message to the gateway the dot in the middle of the bottom row will flash. Everytime the gateway passes a message onto Sonic Pi the dot in the middle of the bottom row will flash too.
+9. When running in Sonic Pi a stream of cues will be shown as the kick drum, snare drum or cymbal is played.
 
 
 ## Demo Video
